@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문맥 추론 · 통합형 (한 지문 5문제)</title>
+<style>
+  :root{
+    --paper:#eef1f7; --card:#ffffff; --ink:#131a33; --ink2:#4a5578; --line:#d6dbe8;
+    --teal:#0f766e; --teal-soft:#e2f1ef;
+    --amber:#c2620a; --amber-soft:#fdf0dd;
+    --shadow:0 1px 2px rgba(19,26,51,.06), 0 8px 24px rgba(19,26,51,.06);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0e1220; --card:#161c30; --ink:#e9ecf5; --ink2:#a3adc9; --line:#2a3350;
+      --teal:#5eead4; --teal-soft:#12312e;
+      --amber:#fbbf5c; --amber-soft:#33240f;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Malgun Gothic","맑은 고딕",system-ui,-apple-system,sans-serif; line-height:1.7}
+  .wrap{max-width:740px; margin:0 auto; padding:28px 18px 72px}
+  .eyebrow{display:inline-block; font-size:.75rem; font-weight:800; letter-spacing:.14em;
+    color:var(--amber); background:var(--amber-soft); border-radius:999px; padding:5px 12px}
+  h1{font-size:1.8rem; line-height:1.25; margin:14px 0 6px; text-wrap:balance; letter-spacing:-.02em}
+  .lede{color:var(--ink2); margin:0}
+  hr.rule{border:0; border-top:1px solid var(--line); margin:22px 0 8px}
+  .direction{font-weight:700; margin:20px 0 10px}
+  /* 지문 */
+  .passage{background:var(--card); border:1px solid var(--line); border-radius:var(--r);
+    padding:18px 20px; box-shadow:var(--shadow); font-size:1rem; line-height:1.95; text-align:justify}
+  .passage p{margin:0 0 12px}
+  .passage p:last-child{margin-bottom:0}
+  .mk{font-weight:800; color:var(--amber); margin-right:1px}
+  .target{font-weight:800; text-decoration:underline; text-decoration-color:var(--amber);
+    text-underline-offset:3px; text-decoration-thickness:2px}
+  /* 문항 */
+  .item{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:18px; box-shadow:var(--shadow); margin-bottom:14px}
+  .ask{font-weight:700; margin:0 0 10px}
+  .ask .mk{font-size:1.05em}
+  .opts{list-style:none; margin:0; padding:0}
+  .opt{display:flex; align-items:flex-start; gap:9px; padding:7px 8px; border-radius:8px; cursor:pointer; font-size:.97rem; line-height:1.55}
+  .opt:hover{background:rgba(120,120,120,.08)}
+  .opt input{width:17px; height:17px; margin:2px 0 0; flex:none; accent-color:var(--teal); cursor:pointer}
+  .opt:has(input:checked){background:var(--teal-soft); font-weight:700}
+  .opt .n{flex:none}
+  .qhead{font-size:1.05rem; font-weight:800; margin:26px 0 12px; display:flex; align-items:center; gap:8px}
+  .qhead .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
+  details.key{margin-top:24px; background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:14px 18px}
+  details.key summary{cursor:pointer; font-weight:800; color:var(--ink2); font-size:.9rem; list-style:none}
+  details.key summary::-webkit-details-marker{display:none}
+  details.key summary::before{content:"▶ "; font-size:.8em}
+  details.key[open] summary::before{content:"▼ "}
+  .key-body{margin-top:10px; font-size:.98rem; color:var(--ink2); line-height:2.1; letter-spacing:.02em}
+  .key-body b{color:var(--ink)}
+  footer{margin-top:30px; text-align:center; color:var(--ink2); font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">문해력 · 유추 훈련 · 통합형</span>
+    <h1>한 지문, 다섯 개의 낯선 말</h1>
+    <p class="lede">하나의 글에 처음 보는 용어 다섯 개(㉠~㉤)가 숨어 있습니다. 앞의 설명이 뒤의 추론을 돕도록
+    엮여 있으니, <b>글을 이어 읽으며</b> 각 말의 뜻을 세워 보세요. 답은 모두 지문 안에 있습니다.</p>
+  </header>
+
+  <hr class="rule">
+
+  <p class="direction">[1 ~ 5] 다음 글을 읽고 물음에 답하시오.</p>
+
+  <div class="passage">
+    <p>자연선택만이 진화를 이끄는 것은 아니다. 개체 수가 적은 집단에서는, 어떤 형질이 유리한지 불리한지와 무관하게 순전한 우연이 다음 세대의 유전자 구성을 바꿔 놓기도 한다. 동전을 몇 번만 던지면 앞면이 우연히 몰릴 수 있듯, 작은 집단에서는 특정 대립유전자가 그 형질의 실력과 상관없이 사라지거나 흔해질 수 있다. 이렇게 우연에 의해 대립유전자의 빈도가 달라지는 일을 <span class="mk">㉠</span><span class="target">유전적 부동</span>이라 한다.</p>
+    <p>이 우연의 힘은 집단이 갑자기 작아질 때 특히 두드러진다. 화산 폭발이나 혹한으로 한 집단의 개체 대부분이 죽고 소수만 살아남으면, 살아남은 소수가 지녔던 유전자만이 다음 세대로 전해진다. 원래 집단이 품고 있던 다양한 유전자 가운데 상당수가 통째로 사라지는 것이다. 이처럼 개체 수의 급격한 감소로 유전적 다양성이 크게 좁아지는 현상을 <span class="mk">㉡</span><span class="target">병목 효과</span>라 한다.</p>
+    <p>비슷한 일은 몇몇 개체가 원래 살던 곳을 떠나 새로운 땅에 정착할 때에도 벌어진다. 새 집단을 이룬 소수는 원래 집단 전체를 대표하지 못한다. 그들이 우연히 지니고 떠난 유전자만으로 새 집단이 꾸려지므로, 새 집단의 유전자 구성은 원래 집단과 사뭇 달라지게 마련이다. 소수의 개척자가 지녔던 유전자가 새 집단의 특성을 결정짓는 이러한 현상을 <span class="mk">㉢</span><span class="target">창시자 효과</span>라 한다.</p>
+    <p>작은 집단이 안고 있는 또 다른 위험은 마땅한 짝이 드물다는 데 있다. 가까운 혈연끼리 거듭 교배하다 보면, 평소에는 우성 유전자에 가려 드러나지 않던 해로운 열성 형질이 짝을 이루어 겉으로 나타날 확률이 높아진다. 그 결과 병약한 개체가 늘고 집단 전체의 생존력이 떨어진다. 근친 교배가 쌓여 집단의 활력이 약해지는 이런 현상을 <span class="mk">㉣</span><span class="target">근교약세</span>라 한다.</p>
+    <p>이 모든 과정이 결국 무엇을 좌우하는가. 한 개체가 살아남아 짝을 얻고 다음 세대에 자손을 얼마나 남기는지, 곧 자신의 유전자를 미래에 얼마나 전하는지가 문제다. 진화에서 어떤 형질의 성공은 그 형질을 지닌 개체가 남긴 자손의 수로 판가름 나는데, 이처럼 다음 세대에 남긴 자손의 수로 재는 값을 <span class="mk">㉤</span><span class="target">적응도</span>라 한다.</p>
+  </div>
+
+  <div class="qhead"><span class="dot"></span>문제</div>
+
+  <!-- 1 -->
+  <div class="item">
+    <p class="ask"><span class="mk">㉠</span> ‘유전적 부동’의 문맥상 의미로 가장 적절한 것은?</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q1"><span class="n">①</span> 유리한 형질이 자연선택을 통해 집단에 퍼지는 과정</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">②</span> 유전자가 환경에 맞추어 스스로 형질을 바꾸는 과정</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">③</span> 형질의 유·불리와 무관하게, 우연에 의해 대립유전자의 빈도가 달라지는 것</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">④</span> 돌연변이로 완전히 새로운 대립유전자가 생겨나는 것</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">⑤</span> 개체가 살아가며 익힌 형질이 자손에게 전해지는 것</label>
+    </div>
+  </div>
+
+  <!-- 2 -->
+  <div class="item">
+    <p class="ask"><span class="mk">㉡</span> ‘병목 효과’의 문맥상 의미로 가장 적절한 것은?</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q2"><span class="n">①</span> 개체 수가 급격히 줄면서 유전적 다양성이 크게 좁아지는 현상</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">②</span> 개체 수가 먹이의 양에 따라 오르내리는 현상</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">③</span> 좁은 통로에 개체가 몰려 이동이 막히는 현상</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">④</span> 천적의 등장으로 특정 형질을 지닌 개체만 살아남는 현상</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">⑤</span> 한 집단이 여러 무리로 갈라져 흩어지는 현상</label>
+    </div>
+  </div>
+
+  <!-- 3 -->
+  <div class="item">
+    <p class="ask"><span class="mk">㉢</span> ‘창시자 효과’의 문맥상 의미로 가장 적절한 것은?</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q3"><span class="n">①</span> 처음 나타난 돌연변이가 집단 전체로 퍼지는 현상</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">②</span> 새 땅을 개척한 소수의 유전자 구성이 새 집단의 특성을 결정짓는 현상</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">③</span> 가장 강한 개체가 무리의 우두머리가 되는 현상</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">④</span> 먼저 정착한 종이 뒤에 온 종을 몰아내는 현상</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">⑤</span> 환경에 가장 먼저 적응한 형질이 유리해지는 현상</label>
+    </div>
+  </div>
+
+  <!-- 4 -->
+  <div class="item">
+    <p class="ask"><span class="mk">㉣</span> ‘근교약세’의 문맥상 의미로 가장 적절한 것은?</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q4"><span class="n">①</span> 근친끼리 교배해 오히려 우수한 자손이 나오는 현상</label>
+      <label class="opt"><input type="radio" name="q4"><span class="n">②</span> 집단이 커질수록 해로운 형질이 저절로 사라지는 현상</label>
+      <label class="opt"><input type="radio" name="q4"><span class="n">③</span> 짝짓기 상대를 두고 벌이는 경쟁이 심해지는 현상</label>
+      <label class="opt"><input type="radio" name="q4"><span class="n">④</span> 서로 다른 종이 교배해 새로운 종이 생겨나는 현상</label>
+      <label class="opt"><input type="radio" name="q4"><span class="n">⑤</span> 가까운 혈연끼리의 교배가 쌓여 해로운 열성 형질이 드러나 집단의 생존력이 떨어지는 현상</label>
+    </div>
+  </div>
+
+  <!-- 5 -->
+  <div class="item">
+    <p class="ask"><span class="mk">㉤</span> ‘적응도’의 문맥상 의미로 가장 적절한 것은?</p>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q5"><span class="n">①</span> 개체가 환경 변화에 얼마나 잘 견디는지를 나타내는 값</label>
+      <label class="opt"><input type="radio" name="q5"><span class="n">②</span> 개체가 지닌 유전적 다양성의 크기</label>
+      <label class="opt"><input type="radio" name="q5"><span class="n">③</span> 개체가 태어나 죽을 때까지 살아가는 기간의 길이</label>
+      <label class="opt"><input type="radio" name="q5"><span class="n">④</span> 한 개체가 다음 세대에 남긴 자손의 수로 재는 값</label>
+      <label class="opt"><input type="radio" name="q5"><span class="n">⑤</span> 형질이 환경에 들어맞는 정도를 눈으로 매긴 점수</label>
+    </div>
+  </div>
+
+  <details class="key">
+    <summary>정답 (교사용)</summary>
+    <div class="key-body">
+      <b>㉠(1)</b> ③ &nbsp; <b>㉡(2)</b> ① &nbsp; <b>㉢(3)</b> ② &nbsp; <b>㉣(4)</b> ⑤ &nbsp; <b>㉤(5)</b> ④
+    </div>
+  </details>
+
+  <footer>
+    <p>낯선 말이 다섯이어도 방법은 하나. 그 말이 <b>정의된 문장</b>과, 앞 문단이 깔아 둔 <b>맥락</b>을 이어 읽으면 됩니다.</p>
+  </footer>
+
+</div>
+</body>
+</html>

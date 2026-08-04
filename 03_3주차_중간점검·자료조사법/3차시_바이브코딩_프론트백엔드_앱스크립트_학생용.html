@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>독서멘토링 3차시 · 홈페이지는 어떻게 만들어질까</title>
+<style>
+  :root{
+    --paper:#eef1f7; --card:#ffffff; --ink:#131a33; --ink2:#4a5578; --line:#d6dbe8;
+    --teal:#0f766e; --teal-soft:#e2f1ef;
+    --amber:#c2620a; --amber-soft:#fdf0dd;
+    --front:#2563b0; --front-soft:#e3edfb;
+    --back:#b4308a; --back-soft:#fbe6f4;
+    --code-bg:#0f1830; --code-ink:#e7ecf7;
+    --shadow:0 1px 2px rgba(19,26,51,.06), 0 8px 24px rgba(19,26,51,.06);
+    --r:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0e1220; --card:#161c30; --ink:#e9ecf5; --ink2:#a3adc9; --line:#2a3350;
+      --teal:#5eead4; --teal-soft:#12312e;
+      --amber:#fbbf5c; --amber-soft:#33240f;
+      --front:#8ab8f0; --front-soft:#122542;
+      --back:#f0a6d4; --back-soft:#33132a;
+      --code-bg:#0a1120; --code-ink:#e7ecf7;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35);
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Malgun Gothic","맑은 고딕",system-ui,-apple-system,sans-serif; line-height:1.7}
+  .wrap{max-width:760px; margin:0 auto; padding:28px 18px 72px}
+  .eyebrow{display:inline-block; font-size:.75rem; font-weight:800; letter-spacing:.14em;
+    color:var(--teal); background:var(--teal-soft); border-radius:999px; padding:5px 12px}
+  h1{font-size:1.9rem; line-height:1.25; margin:14px 0 6px; text-wrap:balance; letter-spacing:-.02em}
+  .lede{color:var(--ink2); margin:0}
+  hr.rule{border:0; border-top:1px solid var(--line); margin:26px 0}
+  h2{font-size:1.2rem; margin:0 0 6px; display:flex; align-items:center; gap:8px}
+  h2 .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
+  .sub{color:var(--ink2); font-size:.95rem; margin:0 0 14px}
+  section{margin:32px 0}
+  /* 목표 배너 */
+  .goal{background:linear-gradient(135deg,var(--teal-soft),var(--card));border:1px solid var(--line);
+    border-radius:var(--r); padding:18px 20px}
+  .goal b{color:var(--ink)}
+  .goal .big{font-size:1.15rem; font-weight:800; color:var(--teal)}
+  /* 비유 카드 그리드 */
+  .grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:560px){ .grid{grid-template-columns:1fr} h1{font-size:1.55rem} }
+  .mcard{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:15px 16px}
+  .mcard .emo{font-size:1.7rem; line-height:1}
+  .mcard .term{font-weight:800; margin:6px 0 2px; font-size:1.02rem}
+  .mcard .as{font-size:.85rem; color:var(--amber); font-weight:700}
+  .mcard .desc{font-size:.9rem; color:var(--ink2); margin-top:4px}
+  /* 식당 흐름 */
+  .flow{display:flex; align-items:stretch; gap:8px; flex-wrap:wrap; margin-top:6px}
+  .fstep{flex:1; min-width:130px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px; text-align:center}
+  .fstep .emo{font-size:1.6rem}
+  .fstep .t{font-weight:800; margin-top:4px}
+  .fstep .t.f{color:var(--front)} .fstep .t.b{color:var(--back)}
+  .fstep .d{font-size:.84rem; color:var(--ink2); margin-top:2px}
+  .arrow{align-self:center; color:var(--ink2); font-weight:800; font-size:1.1rem}
+  /* 프론트/백 비교 */
+  .cmp{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+  @media (max-width:560px){ .cmp{grid-template-columns:1fr} }
+  .col{border:1px solid var(--line); border-radius:var(--r); padding:16px}
+  .col.f{background:var(--front-soft)} .col.b{background:var(--back-soft)}
+  .col h3{margin:0 0 8px; font-size:1.05rem}
+  .col.f h3{color:var(--front)} .col.b h3{color:var(--back)}
+  .col ul{margin:0; padding-left:18px} .col li{margin:6px 0; font-size:.93rem}
+  /* 코드 */
+  .code{background:var(--code-bg); color:var(--code-ink); border-radius:12px; padding:14px 16px;
+    font-family:"D2Coding","Consolas",ui-monospace,monospace; font-size:.86rem; line-height:1.65;
+    overflow-x:auto; margin:8px 0}
+  .code .c{color:#7f9cc4} .code .k{color:#8fd3fe} .code .s{color:#a6e3a1} .code .fn{color:#f9e2af}
+  .filetag{display:inline-block; font-size:.74rem; font-weight:800; color:#fff; border-radius:6px 6px 0 0;
+    padding:3px 10px; margin-bottom:-2px}
+  .filetag.f{background:var(--front)} .filetag.b{background:var(--back)}
+  @media (prefers-color-scheme: dark){ .filetag{color:#0a1120} }
+  /* 콜아웃 */
+  .note{background:var(--amber-soft); border:1px solid var(--line); border-left:4px solid var(--amber);
+    border-radius:10px; padding:14px 16px; font-size:.95rem}
+  .note b{color:var(--ink)}
+  .mission{background:var(--card); border:2px dashed var(--teal); border-radius:var(--r); padding:16px 18px; margin-top:12px}
+  .mission h4{margin:0 0 8px; color:var(--teal)}
+  .mission ol{margin:0; padding-left:20px} .mission li{margin:6px 0}
+  code.inline{background:var(--paper); border:1px solid var(--line); border-radius:5px; padding:1px 6px; font-family:"Consolas",monospace; font-size:.88em}
+  .check{display:flex; gap:8px; align-items:flex-start; margin-top:8px; font-size:.96rem}
+  footer{margin-top:40px; text-align:center; color:var(--ink2); font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">독서멘토링 · 3차시 · 바이브코딩 시작</span>
+    <h1>홈페이지는 어떻게 만들어질까?</h1>
+    <p class="lede">오늘부터 ‘만들기’가 시작됩니다. 겁먹지 마세요 — <b>코딩은 AI에게 말로 시킬 거예요.</b>
+    다만 무엇을 시키는지 알려면, 홈페이지가 어떤 구조인지 <b>비유로</b> 딱 두 가지만 알고 갑시다.</p>
+  </header>
+
+  <div class="goal">
+    <div class="big">🎯 우리의 최종 목표</div>
+    <p style="margin:6px 0 0">나만의 <b>SF 독후감 홈페이지</b>를, <b>폰에서도 PC에서도 예쁘게 보이는(반응형)</b> 웹앱으로 만들기.
+    오늘은 그 첫걸음 — <b>프론트엔드 · 백엔드</b>를 이해하고, <b>AI에게 말 거는 법(프롬프트)</b>으로 홈페이지 첫 화면을 만들어 봅니다.</p>
+  </div>
+
+  <hr class="rule">
+
+  <section>
+    <h2><span class="dot"></span>비유 1 · 웹페이지 = 사람 몸</h2>
+    <p class="sub">웹페이지 하나는 ‘무엇으로’ 만들어질까요? 사람 몸에 빗대면 쉽습니다.</p>
+    <div class="grid">
+      <div class="mcard"><div class="emo">🦴</div><div class="term">HTML</div><div class="as">= 뼈대·골격</div><div class="desc">제목·버튼·문단이 “여기 있다”는 구조</div></div>
+      <div class="mcard"><div class="emo">👕</div><div class="term">CSS</div><div class="as">= 옷·피부</div><div class="desc">색·글꼴·배치, 예쁘게 꾸미기</div></div>
+      <div class="mcard"><div class="emo">💪</div><div class="term">자바스크립트</div><div class="as">= 근육·신경</div><div class="desc">버튼 누르면 반응·계산, 움직임</div></div>
+      <div class="mcard"><div class="emo">🧱</div><div class="term">React</div><div class="as">= 레고 블록</div><div class="desc">자바스크립트를 조각내 조립·재사용</div></div>
+    </div>
+    <p class="note" style="margin-top:12px">📖 <b>독후감 홈페이지로 보면</b> — 줄거리·검증 결과 <b>글의 구조</b>가 HTML(뼈대), 색과 표지 디자인이 CSS(옷), “검증 결과 펼쳐보기” 같은 <b>버튼 반응</b>이 자바스크립트(근육)예요.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>비유 2 · 웹앱 = 식당</h2>
+    <p class="sub">웹앱은 ‘어떻게 돌아가는지’가 중요해요. 식당에 빗대면 한 방에 이해됩니다.</p>
+    <div class="grid">
+      <div class="mcard"><div class="emo">🍽️</div><div class="term">프론트엔드</div><div class="as">= 홀 (front)</div><div class="desc">손님이 보고 만지는 곳 = 화면</div></div>
+      <div class="mcard"><div class="emo">👨‍🍳</div><div class="term">백엔드</div><div class="as">= 주방 (back)</div><div class="desc">안 보이는 곳에서 실제로 처리</div></div>
+      <div class="mcard"><div class="emo">🏪</div><div class="term">서버</div><div class="as">= 24시간 가게</div><div class="desc">요청하면 내주는 쪽 (serve = 대접)</div></div>
+      <div class="mcard"><div class="emo">🧊</div><div class="term">데이터베이스</div><div class="as">= 냉장고·창고</div><div class="desc">재료(데이터)를 보관하는 곳</div></div>
+    </div>
+    <div class="flow">
+      <div class="fstep"><div class="emo">🍽️</div><div class="t f">홀 (프론트)</div><div class="d">손님이 주문·구경</div></div>
+      <div class="arrow">→</div>
+      <div class="fstep"><div class="emo">👨‍🍳</div><div class="t b">주방 (백)</div><div class="d">뒤에서 요리·처리</div></div>
+      <div class="arrow">→</div>
+      <div class="fstep"><div class="emo">🧊</div><div class="t b">냉장고 (DB)</div><div class="d">재료 꺼내고 보관</div></div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>그래서, 프론트엔드 vs 백엔드</h2>
+    <p class="sub">한 문장: <b>보이면 프론트, 안 보이면 백엔드.</b></p>
+    <div class="cmp">
+      <div class="col f">
+        <h3>🍽️ 프론트엔드 (홀)</h3>
+        <ul>
+          <li>손님(방문자)이 <b>눈으로 보는</b> 모든 것</li>
+          <li>화면·색·글꼴·버튼·애니메이션</li>
+          <li>재료: <b>HTML · CSS · 자바스크립트</b></li>
+          <li>독후감 홈: <b>내 독후감 글, 표지, 디자인</b></li>
+        </ul>
+      </div>
+      <div class="col b">
+        <h3>👨‍🍳 백엔드 (주방)</h3>
+        <ul>
+          <li>손님 눈엔 <b>안 보이지만</b> 뒤에서 일함</li>
+          <li>저장·계산·불러오기 같은 <b>처리</b></li>
+          <li>서버 + 데이터베이스와 함께 작동</li>
+          <li>독후감 홈: <b>방명록 저장, 방문자 수 세기</b></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <hr class="rule">
+
+  <section>
+    <h2><span class="dot"></span>AI에게 말 거는 법 · 프롬프트</h2>
+    <p class="sub">‘프롬프트(prompt)’는 AI에게 건네는 <b>주문서</b>예요. 요리사(AI)에게 “이렇게 만들어 주세요” 하고 부탁하는 말이죠.
+    주문을 잘할수록 원하는 게 정확히 나옵니다.</p>
+
+    <div class="cmp">
+      <div class="col b">
+        <h3>❌ 막연한 주문</h3>
+        <p style="margin:0; font-size:.95rem">“홈페이지 만들어줘”<br>
+        <span style="color:var(--ink2)">→ 뭘 담을지 몰라 엉뚱하게 나옴</span></p>
+      </div>
+      <div class="col f">
+        <h3>✅ 좋은 주문</h3>
+        <p style="margin:0; font-size:.95rem">“「마션」 독후감 홈페이지 만들어줘. 맨 위 큰 제목, 줄거리 3줄, ‘내가 검증한 과학’ 3개(누르면 펼쳐짐), 마지막에 소감. 화성 느낌의 어두운 배경, <b>폰에서도 잘 보이게</b>.”</p>
+      </div>
+    </div>
+
+    <p style="margin:16px 0 6px; font-weight:700">좋은 프롬프트의 4가지 재료</p>
+    <div class="grid">
+      <div class="mcard"><div class="emo">📦</div><div class="term">① 무엇을 · 무엇을 담아</div><div class="desc">“독후감 홈페이지. 제목·줄거리·검증·소감 넣어줘”</div></div>
+      <div class="mcard"><div class="emo">🎨</div><div class="term">② 느낌 · 디자인</div><div class="desc">“우주 느낌 어두운 배경, 파란 강조색으로”</div></div>
+      <div class="mcard"><div class="emo">🖱️</div><div class="term">③ 기능</div><div class="desc">“검증 결과는 눌러서 펼쳐지게, 반응형으로”</div></div>
+      <div class="mcard"><div class="emo">🔁</div><div class="term">④ 고쳐 말하기</div><div class="desc">“글씨가 작아, 크게”, “표지 넣을 자리 만들어”</div></div>
+    </div>
+
+    <div class="mission">
+      <h4>🖐 오늘 실습 · AI와 대화하며 내 홈페이지 첫 화면 만들기</h4>
+      <ol>
+        <li>내 책으로 위 <b>‘좋은 주문’</b>처럼 프롬프트를 한 문장 써 본다.</li>
+        <li>AI에게 보내고, 나온 화면을 눈으로 확인한다.</li>
+        <li>맘에 안 드는 곳을 <b>고쳐 말한다</b> (④번처럼) — 두세 번 반복!</li>
+        <li>“<b>폰에서도 잘 보이게 반응형으로</b>”를 꼭 한 번 넣는다.</li>
+      </ol>
+    </div>
+
+    <p class="note" style="margin-top:12px">💡 <b>비법은 하나 —</b> 잘하는 사람은 ‘한 번에’ 만드는 게 아니라 <b>여러 번 고쳐 말하며</b> 다듬습니다.
+    틀려도, 이상하게 나와도 괜찮아요. 그냥 “<b>이렇게 바꿔줘</b>” 하면 됩니다. 마음껏 시켜 보세요!</p>
+  </section>
+
+</div>
+</body>
+</html>

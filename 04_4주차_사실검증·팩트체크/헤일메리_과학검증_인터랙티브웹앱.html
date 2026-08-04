@@ -1,0 +1,264 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>프로젝트 헤일메리 · 과학 검증 3</title>
+<style>
+  :root{
+    --bg:#0b1020; --bg2:#131a30; --card:#182140; --card2:#1f2a4e; --ink:#eef2ff; --sub:#a7b0d6; --line:#2c3760;
+    --astro:#ff8a3d; --astro2:#ffb37a; --cyan:#4fd6d0; --gold:#f7c948;
+    --ok:#4fd6a0; --warn:#f7b32b; --bad:#ff6b7d;
+    --r:16px;
+  }
+  *{box-sizing:border-box}
+  body{margin:0; color:var(--ink); line-height:1.65;
+    font-family:"Malgun Gothic","맑은 고딕",system-ui,-apple-system,sans-serif;
+    background:radial-gradient(1100px 600px at 82% -8%, #3a2416 0%, transparent 60%),
+               radial-gradient(900px 600px at -8% 12%, #10203a 0%, transparent 55%), var(--bg);}
+  .wrap{max-width:840px; margin:0 auto; padding:0 18px 80px}
+  header.hero{text-align:center; padding:58px 12px 30px}
+  .astrophage{width:96px;height:96px;border-radius:50%;margin:0 auto 20px;
+    background:radial-gradient(circle at 38% 32%, var(--astro2), var(--astro) 55%, #7a2e10 100%);
+    box-shadow:0 0 46px rgba(255,138,61,.5), inset -8px -6px 20px rgba(0,0,0,.4);}
+  .tag{display:inline-block;font-size:.76rem;letter-spacing:.14em;color:var(--gold);
+    border:1px solid var(--line);border-radius:999px;padding:5px 13px;margin-bottom:14px}
+  h1{font-size:2rem;margin:.1em 0 .3em;line-height:1.25}
+  h1 .hl{color:var(--astro2)}
+  .lede{color:var(--sub);max-width:600px;margin:0 auto;font-size:1.03rem}
+  section{margin:40px 0}
+  .kicker{font-size:.8rem;letter-spacing:.1em;color:var(--astro2);font-weight:800;margin-bottom:6px}
+  h2{font-size:1.4rem;margin:.1em 0 .5em}
+  .card{background:linear-gradient(180deg,var(--card),var(--bg2));border:1px solid var(--line);border-radius:var(--r);padding:20px}
+  .claim{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
+  .claim .ic{font-size:1.7rem;line-height:1}
+  .claim .txt{flex:1}
+  .claim .txt .l{font-size:.78rem;font-weight:800;color:var(--astro2)}
+  .claim .txt p{margin:2px 0 0;color:var(--sub)}
+  .verdict{display:inline-block;font-size:.8rem;font-weight:800;padding:4px 11px;border-radius:999px;white-space:nowrap}
+  .v-bad{background:rgba(255,107,125,.15);color:var(--bad);border:1px solid rgba(255,107,125,.45)}
+  .v-warn{background:rgba(247,179,43,.15);color:var(--warn);border:1px solid rgba(247,179,43,.45)}
+  .v-spec{background:rgba(79,214,208,.14);color:var(--cyan);border:1px solid rgba(79,214,208,.45)}
+  /* Topic 1 — energy bars */
+  .bars{display:grid;gap:9px;margin:8px 0}
+  .bar{cursor:pointer}
+  .bar .top{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:3px}
+  .bar .track{height:16px;background:var(--card2);border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .bar .fill{height:100%;background:linear-gradient(90deg,var(--cyan),var(--gold))}
+  .bar.astro .fill{background:linear-gradient(90deg,var(--astro),#ff5a5a)}
+  .bar.sel .track{outline:2px solid var(--gold)}
+  #e-detail{margin-top:12px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.92rem;color:var(--sub);min-height:2.6em}
+  #e-detail b{color:var(--ink)}
+  /* Topic 2 — temp slider */
+  .slab{font-size:.9rem;color:var(--sub);display:flex;justify-content:space-between}
+  input[type=range]{width:100%;-webkit-appearance:none;height:8px;border-radius:8px;outline:none;margin:8px 0 4px;
+    background:linear-gradient(90deg,#6db6ff, #7de0c0 40%, var(--gold) 70%, var(--astro));}
+  input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--gold);cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.5)}
+  .scale{position:relative;height:64px;margin-top:6px}
+  .zone{position:absolute;top:0;height:22px;border-radius:6px;font-size:.72rem;display:flex;align-items:center;justify-content:center;color:#04121f;font-weight:800;overflow:hidden}
+  .zone.water{background:rgba(109,182,255,.85);top:0}
+  .zone.amm{background:rgba(125,224,192,.85);top:26px}
+  .mark{position:absolute;top:-2px;bottom:-2px;width:2px;background:#fff}
+  .mark span{position:absolute;top:-18px;left:-14px;font-size:.68rem;color:#fff;white-space:nowrap}
+  #t-out{margin-top:10px;background:var(--card2);border:1px solid var(--line);border-radius:12px;padding:12px 14px;font-size:.92rem}
+  #t-out b{color:var(--gold)}
+  /* Topic 3 — toggle */
+  .toggle{display:flex;gap:8px;margin-bottom:12px}
+  .toggle button{flex:1;padding:11px;border-radius:12px;border:1px solid var(--line);background:var(--card2);color:var(--ink);font-weight:800;font-size:1rem;cursor:pointer}
+  .toggle button.on{background:var(--gold);color:#1a1405;border-color:var(--gold)}
+  .cmp{display:grid;gap:8px}
+  .crow{display:grid;grid-template-columns:120px 1fr;gap:10px;background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:9px 12px;font-size:.92rem}
+  .crow .k{color:var(--sub);font-weight:700}
+  /* quiz */
+  .qbox{margin:14px 0}
+  .qt{font-weight:700;margin-bottom:8px}
+  .opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1px solid var(--line);border-radius:12px;padding:11px 14px;margin:7px 0;cursor:pointer;font-size:.97rem}
+  .opt:hover{border-color:var(--astro2)}
+  .opt.correct{border-color:var(--ok);background:rgba(79,214,160,.14)}
+  .opt.wrong{border-color:var(--bad);background:rgba(255,107,125,.14)}
+  .opt.lock{pointer-events:none;opacity:.92}
+  .fb{font-size:.9rem;margin-top:6px;min-height:1.2em}
+  .fb.g{color:var(--ok)} .fb.r{color:var(--bad)}
+  .score{text-align:center;font-weight:800;color:var(--gold);margin-top:12px;min-height:1.3em}
+  footer{margin-top:44px;text-align:center;color:var(--sub);font-size:.86rem}
+  .note{background:rgba(247,201,72,.08);border:1px solid var(--line);border-left:3px solid var(--gold);border-radius:10px;padding:11px 14px;font-size:.9rem;color:var(--sub);margin-top:12px}
+  @media (max-width:560px){h1{font-size:1.6rem}.crow{grid-template-columns:96px 1fr}.claim{flex-direction:column}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="hero">
+    <div class="astrophage" aria-hidden="true"></div>
+    <div class="tag">프로젝트 헤일메리 · 과학 검증</div>
+    <h1>소설 속 <span class="hl">생명과 연료</span>,<br>진짜 과학일까?</h1>
+    <p class="lede">『프로젝트 헤일메리』의 핵심 설정 세 가지를 직접 만져보며 검증합니다.
+    밀어보고, 눌러보고, 바꿔 보세요. 판정은 <b>사실 / 과장 / 미검증</b>으로.</p>
+  </header>
+
+  <!-- TOPIC 1 -->
+  <section>
+    <div class="kicker">검증 ① · 연료가 되는 생명체</div>
+    <h2>미생물이 우주선 연료가 될 수 있을까?</h2>
+    <div class="card">
+      <div class="claim">
+        <div class="ic">🦠</div>
+        <div class="txt"><span class="l">📖 소설</span>
+          <p>미생물 ‘아스트로파지’가 태양 에너지를 몸에 저장했다가 뿜어, 우주선을 광속의 몇 %까지 가속한다.</p></div>
+        <span class="verdict v-warn">🟡 과장</span>
+      </div>
+      <p style="margin:0 0 8px;color:var(--sub);font-size:.93rem">막대를 눌러 <b>에너지 밀도(1kg에 담긴 에너지)</b>를 비교해 보세요. (가로 = 로그 눈금)</p>
+      <div class="bars" id="ebars"></div>
+      <div id="e-detail">막대를 눌러 보세요.</div>
+      <div class="note">🔬 <b>실제 과학</b> — 생물이 저장하는 에너지는 지방이 최고(약 3.8×10⁷ J/kg)인데, 아스트로파지가 주장하는 값(거의 mc²)은 그보다 <b>약 20억 배</b> 높습니다. 광속의 10%로 가속하려면 1kg당 4.5×10¹⁴ J이 필요 — 생물·화학으로는 닿을 수 없는 값이에요.</div>
+    </div>
+  </section>
+
+  <!-- TOPIC 2 -->
+  <section>
+    <div class="kicker">검증 ② · 암모니아 생명</div>
+    <h2>암모니아 환경에서 생명이 살 수 있을까?</h2>
+    <div class="card">
+      <div class="claim">
+        <div class="ic">👽</div>
+        <div class="txt"><span class="l">📖 소설</span>
+          <p>로키(에리드인)는 물 대신 <b>암모니아</b> 환경, 약 29기압·<b>210℃</b>의 몸으로 살아간다.</p></div>
+        <span class="verdict v-spec">🔵 미검증</span>
+      </div>
+      <div class="slab"><span>온도 슬라이더</span><span id="t-val">37 ℃</span></div>
+      <input type="range" id="temp" min="-100" max="250" value="37" step="1">
+      <div class="scale" id="scale"></div>
+      <div id="t-out"></div>
+      <div class="note">🔬 <b>실제 과학</b> — 암모니아가 물을 대신하는 생명은 학계의 <b>진지한 가설</b>이에요(토성 위성 타이탄). 다만 암모니아는 보통 <b>낮은 온도</b>에서 액체라, 저온 생명을 상정합니다. 로키처럼 <b>210℃ 고온</b>에서 암모니아가 액체이려면 아주 높은 압력이 필요 — 가능성은 열려 있지만 <b>특이한 설정</b>입니다.</div>
+    </div>
+  </section>
+
+  <!-- TOPIC 3 -->
+  <section>
+    <div class="kicker">검증 ③ · 탄소 vs 규소</div>
+    <h2>생명은 꼭 탄소여야 할까?</h2>
+    <div class="card">
+      <div class="claim">
+        <div class="ic">🧬</div>
+        <div class="txt"><span class="l">📖 생각거리</span>
+          <p>로키의 몸은 금속·광물 느낌이다. 그렇다면 <b>탄소가 아닌 규소(실리콘)</b>로 된 생명도 가능할까?</p></div>
+        <span class="verdict v-spec">🔵 미검증</span>
+      </div>
+      <div class="toggle">
+        <button id="btnC" class="on" onclick="setElem('C')">🌱 탄소 생명</button>
+        <button id="btnSi" onclick="setElem('Si')">🪨 규소 생명</button>
+      </div>
+      <div class="cmp" id="cmp"></div>
+      <div class="note">🔬 <b>실제 과학</b> — 규소도 4개의 결합을 하지만 원자가 커서 결합이 <b>약하고</b> 긴 사슬·이중결합을 잘 못 만듭니다. 결정적으로 탄소의 산화물 CO₂는 <b>기체</b>라 숨으로 내뱉지만, 규소의 산화물 SiO₂는 <b>고체(모래·석영)</b>라 내보내기 어려워요. 그래서 <b>탄소가 압도적으로 유리</b>하고, 규소 생명은 가능성이 매우 낮습니다.</div>
+    </div>
+  </section>
+
+  <!-- QUIZ -->
+  <section>
+    <div class="kicker">확인 · 3문제</div>
+    <h2>내가 검증가라면?</h2>
+    <div class="card" id="quiz"></div>
+    <div class="score" id="score"></div>
+  </section>
+
+  <footer>
+    <p><b>사실 · 과장 · 미검증</b> — 무조건 틀렸다가 아니라 등급을 매기는 것,<br>그게 과학적 검증입니다. 이제 너희 책으로 해볼 차례!</p>
+  </footer>
+</div>
+
+<script>
+/* ---------- Topic 1: energy bars ---------- */
+const FUELS=[
+  {n:"설탕(탄수화물)", v:1.7e7, note:"우리가 먹는 에너지원. 생물 연료의 기본."},
+  {n:"지방", v:3.8e7, note:"생물이 저장하는 가장 밀도 높은 형태. 생물학의 한계선."},
+  {n:"휘발유", v:4.6e7, note:"자동차 연료. 생물 최고치와 비슷한 수준."},
+  {n:"핵분열(우라늄)", v:8e13, note:"원자력. 화학연료의 약 200만 배."},
+  {n:"질량-에너지(E=mc²)", v:9e16, note:"물질을 통째로 에너지로 바꾼 이론상 최대."},
+  {n:"아스트로파지(소설)", v:9e16, astro:true, note:"소설은 이 최대치에 육박한다고 설정 — 미생물로는 불가능한 값!"}
+];
+const NEED01c=4.5e14;
+const lo=7, hi=17; // log10 range
+const ebars=document.getElementById("ebars");
+FUELS.forEach((f,i)=>{
+  const w=Math.max(6,Math.min(100,(Math.log10(f.v)-lo)/(hi-lo)*100));
+  const d=document.createElement("div"); d.className="bar"+(f.astro?" astro":"");
+  d.innerHTML=`<div class="top"><span>${f.n}</span><span>${f.v.toExponential(1)} J/kg</span></div><div class="track"><div class="fill" style="width:${w}%"></div></div>`;
+  d.onclick=()=>{
+    [...ebars.children].forEach(x=>x.classList.remove("sel")); d.classList.add("sel");
+    const ratio=(f.v/3.8e7);
+    document.getElementById("e-detail").innerHTML=
+      `<b>${f.n}</b> · ${f.v.toExponential(1)} J/kg<br>${f.note}<br>`+
+      (f.v>=NEED01c ? `→ 광속 10% 가속(4.5×10¹⁴ 필요)에 <b>충분</b>합니다.` :
+        `→ 광속 10% 가속엔 <b>${(NEED01c/f.v).toExponential(1)}배</b> 부족합니다.`);
+  };
+  ebars.appendChild(d);
+});
+
+/* ---------- Topic 2: temperature ---------- */
+const scale=document.getElementById("scale");
+const Tmin=-100,Tmax=250, pct=t=>((t-Tmin)/(Tmax-Tmin)*100);
+scale.innerHTML=
+  `<div class="zone water" style="left:${pct(0)}%;width:${pct(100)-pct(0)}%">물 액체(0~100℃)</div>`+
+  `<div class="zone amm" style="left:${pct(-78)}%;width:${pct(-33)-pct(-78)}%">암모니아 액체(-78~-33℃, 1기압)</div>`+
+  `<div class="mark" style="left:${pct(37)}%"><span>사람 37℃</span></div>`+
+  `<div class="mark" style="left:${pct(210)}%"><span>로키 210℃</span></div>`;
+const temp=document.getElementById("temp"), tval=document.getElementById("t-val"), tout=document.getElementById("t-out");
+function updT(){
+  const t=+temp.value; tval.textContent=t+" ℃";
+  const water=(t>=0&&t<=100), amm=(t>=-78&&t<=-33);
+  let s=`<b>${t}℃</b> · 1기압에서 — `;
+  s+= water? "물은 <b>액체</b> 💧 " : "물은 액체가 아님 ";
+  s+= amm? "· 암모니아는 <b>액체</b> ✅" : "· 암모니아는 액체 아님";
+  if(t>=180) s+="<br>🔸 로키의 세계(약 210℃)! 이 온도에서 암모니아가 액체이려면 <b>매우 높은 압력</b>이 필요합니다.";
+  else if(t<=-33 && t>=-78) s+="<br>🔹 타이탄처럼 <b>차가운 암모니아 바다</b>가 있을 법한 구간.";
+  tout.innerHTML=s;
+}
+temp.addEventListener("input",updT); updT();
+
+/* ---------- Topic 3: carbon vs silicon ---------- */
+const ELEM={
+  C:{rows:[["결합 수","4개 — 안정적이고 다재다능"],["사슬·고리","길고 복잡한 분자를 잘 만듦"],["이중결합","잘 만듦(생명 화학의 핵심)"],["산화물","CO₂ = 기체 → 숨으로 내뱉기 쉬움"],["판정","🌍 지구 모든 생명의 바탕"]]},
+  Si:{rows:[["결합 수","4개지만 원자가 커서 결합이 약함"],["사슬·고리","길게 잇기 어렵고 잘 끊어짐(실레인 불안정)"],["이중결합","거의 못 만듦"],["산화물","SiO₂ = 고체(모래·석영) → 내뱉기 어려움"],["판정","🪨 가능성 매우 낮음(고온 특수환경 정도)"]]}
+};
+function setElem(e){
+  document.getElementById("btnC").classList.toggle("on",e==="C");
+  document.getElementById("btnSi").classList.toggle("on",e==="Si");
+  document.getElementById("cmp").innerHTML=ELEM[e].rows.map(r=>`<div class="crow"><div class="k">${r[0]}</div><div>${r[1]}</div></div>`).join("");
+}
+setElem("C");
+
+/* ---------- Quiz ---------- */
+const QUIZ=[
+  {t:"아스트로파지가 ‘과장’으로 판정된 핵심 이유는?",
+   o:["미생물은 원래 에너지를 못 저장해서","생물의 에너지 밀도가 필요한 값보다 수억 배 낮아서","태양엔 미생물이 살 수 없어서"],a:1,
+   e:"생물 최고(지방)도 우주선 추진에 필요한 에너지의 수억 분의 1입니다."},
+  {t:"암모니아 생명이 보통 상정되는 환경은?",
+   o:["아주 뜨거운 고온 환경","아주 차가운 저온 환경(예: 타이탄)","진공의 우주 공간"],a:1,
+   e:"암모니아는 낮은 온도에서 액체라, 저온 생명이 일반적 가설입니다. 로키의 고온은 특이해요."},
+  {t:"규소 생명이 어려운 결정적 이유 하나는?",
+   o:["규소가 지구에 너무 적어서","산화물 SiO₂가 고체라 숨으로 내보내기 어려워서","규소는 결합을 아예 못 해서"],a:1,
+   e:"CO₂는 기체지만 SiO₂는 모래(고체)라 대사 순환이 어렵습니다."}
+];
+let solved=0,correct=0;
+const qroot=document.getElementById("quiz");
+QUIZ.forEach((q,qi)=>{
+  const box=document.createElement("div"); box.className="qbox";
+  box.innerHTML=`<div class="qt">Q${qi+1}. ${q.t}</div>`;
+  q.o.forEach((opt,oi)=>{
+    const b=document.createElement("button"); b.className="opt"; b.textContent=opt;
+    b.onclick=()=>{
+      [...box.querySelectorAll(".opt")].forEach(x=>x.classList.add("lock"));
+      const fb=box.querySelector(".fb");
+      if(oi===q.a){b.classList.add("correct");fb.className="fb g";fb.textContent="정답! "+q.e;correct++;}
+      else{b.classList.add("wrong");fb.className="fb r";fb.textContent="아쉬워요. "+q.e;box.querySelectorAll(".opt")[q.a].classList.add("correct");}
+      solved++;
+      if(solved===QUIZ.length) document.getElementById("score").textContent=`점수: ${correct} / ${QUIZ.length} ${correct===QUIZ.length?"— 완벽! 🏆":""}`;
+    };
+    box.appendChild(b);
+  });
+  const fb=document.createElement("div"); fb.className="fb"; box.appendChild(fb);
+  qroot.appendChild(box);
+});
+</script>
+</body>
+</html>
