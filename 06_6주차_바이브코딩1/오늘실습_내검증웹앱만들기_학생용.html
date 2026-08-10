@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>오늘 실습 · 내 검증 웹앱 만들기</title>
+<style>
+  :root{
+    --paper:#eef1f7; --card:#ffffff; --ink:#131a33; --ink2:#4a5578; --line:#d6dbe8;
+    --teal:#0f766e; --teal-soft:#e2f1ef; --amber:#c2620a; --amber-soft:#fdf0dd;
+    --warn:#c2620a; --spec:#2563b0; --spec-soft:#e3edfb;
+    --code-bg:#0f1830; --code-ink:#e7ecf7;
+    --shadow:0 1px 2px rgba(19,26,51,.06), 0 8px 24px rgba(19,26,51,.06); --r:14px;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#0e1220; --card:#161c30; --ink:#e9ecf5; --ink2:#a3adc9; --line:#2a3350;
+      --teal:#5eead4; --teal-soft:#12312e; --amber:#fbbf5c; --amber-soft:#33240f;
+      --spec:#8ab8f0; --spec-soft:#122542; --code-bg:#0a1120;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 8px 24px rgba(0,0,0,.35); }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Malgun Gothic","맑은 고딕",system-ui,-apple-system,sans-serif; line-height:1.7}
+  .wrap{max-width:760px; margin:0 auto; padding:28px 18px 72px}
+  .eyebrow{display:inline-block; font-size:.75rem; font-weight:800; letter-spacing:.14em;
+    color:var(--teal); background:var(--teal-soft); border-radius:999px; padding:5px 12px}
+  h1{font-size:1.9rem; line-height:1.25; margin:14px 0 6px; text-wrap:balance; letter-spacing:-.02em}
+  .lede{color:var(--ink2); margin:0}
+  hr.rule{border:0; border-top:1px solid var(--line); margin:26px 0}
+  h2{font-size:1.18rem; margin:0 0 6px; display:flex; align-items:center; gap:8px}
+  h2 .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);flex:none}
+  .sub{color:var(--ink2); font-size:.95rem; margin:0 0 14px}
+  section{margin:30px 0}
+  .flow{display:flex; gap:8px; flex-wrap:wrap; margin-top:8px}
+  .fstep{flex:1; min-width:120px; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px; text-align:center; font-size:.92rem}
+  .fstep .n{font-size:.75rem; font-weight:800; color:var(--amber)}
+  .fstep b{display:block; margin-top:3px}
+  /* 검증 카드 */
+  .vcards{display:grid; gap:12px}
+  .vcard{background:var(--card); border:1px solid var(--line); border-radius:var(--r); padding:16px; box-shadow:var(--shadow)}
+  .vcard .h{display:flex; align-items:center; gap:10px; flex-wrap:wrap; margin-bottom:6px}
+  .vcard .h .t{font-weight:800; font-size:1.03rem; flex:1; min-width:150px}
+  .badge{font-size:.75rem; font-weight:800; padding:3px 10px; border-radius:999px; white-space:nowrap; border:1px solid transparent}
+  .b-warn{color:var(--warn); background:var(--amber-soft); border-color:var(--warn)}
+  .b-spec{color:var(--spec); background:var(--spec-soft); border-color:var(--spec)}
+  .vcard .row{margin:6px 0; font-size:.94rem}
+  .vcard .row .l{font-size:.76rem; font-weight:800; color:var(--teal)}
+  .vcard .row.novel .l{color:var(--amber)}
+  .vcard .row p{margin:1px 0 0; color:var(--ink2)}
+  /* 프롬프트 박스 */
+  .prompt{background:var(--code-bg); color:var(--code-ink); border-radius:12px; padding:15px 16px; font-size:.93rem; line-height:1.7; position:relative}
+  .prompt .tag{position:absolute; top:-10px; left:14px; font-size:.72rem; font-weight:800; background:var(--amber); color:#1a1405; border-radius:6px; padding:3px 9px}
+  .recipe{display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:6px}
+  @media (max-width:560px){ .recipe{grid-template-columns:1fr} h1{font-size:1.55rem} }
+  .rc{background:var(--card); border:1px solid var(--line); border-radius:12px; padding:12px 14px; font-size:.92rem}
+  .rc b{color:var(--teal)}
+  /* 단계 */
+  .steps{display:grid; gap:10px}
+  .step{display:grid; grid-template-columns:34px 1fr; gap:12px; align-items:start; background:var(--card); border:1px solid var(--line); border-radius:12px; padding:13px 15px}
+  .step .num{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:800}
+  .step b{display:block} .step p{margin:2px 0 0; color:var(--ink2); font-size:.93rem}
+  .note{background:var(--amber-soft); border:1px solid var(--line); border-left:4px solid var(--amber); border-radius:10px; padding:13px 15px; font-size:.94rem}
+  .note b{color:var(--ink)}
+  .check{display:flex; gap:8px; align-items:flex-start; margin-top:8px; font-size:.96rem}
+  code.i{background:var(--paper); border:1px solid var(--line); border-radius:5px; padding:1px 6px; font-family:Consolas,monospace; font-size:.9em}
+  footer{margin-top:40px; text-align:center; color:var(--ink2); font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">독서멘토링 · 웹앱 제작 실습</span>
+    <h1>오늘, 내 손으로 검증 웹앱 만들기</h1>
+    <p class="lede">『프로젝트 헤일메리』에서 검증한 <b>세 가지</b>를, 오늘 <b>AI와 대화</b>하며 나만의 웹페이지로 만듭니다.
+    코딩은 안 해요 — <b>말로 시키고, 고쳐 말하며</b> 완성합니다.</p>
+    <div class="flow">
+      <div class="fstep"><span class="n">STEP 0</span><b>비문학 워밍업</b>지문 한 문제</div>
+      <div class="fstep"><span class="n">STEP 1</span><b>재료 확인</b>검증 3주제</div>
+      <div class="fstep"><span class="n">STEP 2</span><b>뼈대 만들기</b>프롬프트로</div>
+      <div class="fstep"><span class="n">STEP 3</span><b>다듬기</b>고쳐 말하기</div>
+    </div>
+  </header>
+
+  <hr class="rule">
+
+  <section>
+    <h2><span class="dot"></span>STEP 1 · 웹앱에 담을 재료 — 검증 3주제</h2>
+    <p class="sub">이 세 가지가 내 웹앱의 <b>내용</b>이 됩니다. 각 카드에 ‘소설 설정 → 실제 과학 → 판정’을 담아요.</p>
+    <div class="vcards">
+      <div class="vcard">
+        <div class="h"><span>🦠</span><span class="t">① 연료가 되는 생명체</span><span class="badge b-warn">🟡 과장</span></div>
+        <div class="row novel"><span class="l">📖 소설</span><p>미생물 아스트로파지가 태양 에너지를 저장해 우주선을 광속의 몇 %까지 가속한다.</p></div>
+        <div class="row"><span class="l">🔬 실제</span><p>생물이 저장하는 에너지(지방)는 필요한 값의 <b>약 20억분의 1</b>. 화학·생물로는 닿을 수 없다.</p></div>
+      </div>
+      <div class="vcard">
+        <div class="h"><span>👽</span><span class="t">② 암모니아 환경의 생명</span><span class="badge b-spec">🔵 미검증</span></div>
+        <div class="row novel"><span class="l">📖 소설</span><p>로키는 물 대신 암모니아, 약 29기압·210℃의 몸으로 살아간다.</p></div>
+        <div class="row"><span class="l">🔬 실제</span><p>암모니아 생명은 진지한 가설(타이탄). 단 보통 <b>저온</b>을 상정 — 로키의 <b>고온</b>은 특이하다.</p></div>
+      </div>
+      <div class="vcard">
+        <div class="h"><span>🧬</span><span class="t">③ 탄소 vs 규소 생명</span><span class="badge b-spec">🔵 미검증</span></div>
+        <div class="row novel"><span class="l">📖 생각거리</span><p>탄소가 아닌 규소(실리콘)로 된 생명도 가능할까?</p></div>
+        <div class="row"><span class="l">🔬 실제</span><p>규소는 결합이 약하고, 산화물 <b>SiO₂가 고체(모래)</b>라 숨으로 못 내뱉는다 → 탄소가 압도적으로 유리.</p></div>
+      </div>
+    </div>
+    <p class="note" style="margin-top:12px">🔎 <b>모델을 보고 시작하세요</b> — 선생님이 만든 <b>헤일메리 검증 웹앱</b>이 바로 이 구조예요. “이런 걸 만든다”를 눈으로 본 뒤 시작하면 훨씬 쉬워요.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>STEP 2 · 뼈대 만들기 — 첫 프롬프트</h2>
+    <p class="sub">아래를 <b>그대로 복사</b>해 AI에게 보내 보세요. (책·주제는 내 것으로 바꿔도 좋아요)</p>
+    <div class="prompt"><span class="tag">복사해서 보내기</span>
+    「프로젝트 헤일메리」 과학 검증 홈페이지를 만들어줘. 맨 위에 큰 제목,
+    아래에 검증 카드 3개 — ①연료가 되는 생명체 ②암모니아 환경의 생명 ③탄소 vs 규소.
+    각 카드에 ‘소설 설정 → 실제 과학 → 판정(사실/과장/미검증)’을 넣어줘.
+    우주 느낌의 어두운 배경, 파란·주황 강조색, <b>폰에서도 잘 보이게 반응형으로</b>.</div>
+    <div class="recipe">
+      <div class="rc"><b>① 무엇을·무엇을 담아</b><br>제목·검증 3개·판정</div>
+      <div class="rc"><b>② 느낌·디자인</b><br>우주 느낌 어두운 배경</div>
+      <div class="rc"><b>③ 기능</b><br>판정 눌러 펼치기·반응형</div>
+      <div class="rc"><b>④ 고쳐 말하기</b><br>“글씨 크게”, “카드 색 바꿔”</div>
+    </div>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>STEP 3 · 다듬기 — 이렇게 진행</h2>
+    <div class="steps">
+      <div class="step"><div class="num">1</div><div><b>뼈대 확인</b><p>나온 화면에 제목·카드 3개가 있나? 없으면 “카드 3개로 만들어줘”.</p></div></div>
+      <div class="step"><div class="num">2</div><div><b>내용 채우기</b><p>위 재료(소설·실제·판정)를 정확히 넣어 달라고. “②번 카드 실제 과학을 이렇게 바꿔줘: …”</p></div></div>
+      <div class="step"><div class="num">3</div><div><b>인터랙션 추가</b><p>“판정을 누르면 설명이 펼쳐지게”, “①번에 에너지 막대그래프 넣어줘” 처럼 <b>만져지는 것</b>을 하나.</p></div></div>
+      <div class="step"><div class="num">4</div><div><b>디자인 손보기</b><p>“배경을 더 우주처럼”, “글씨 키우고 여백 넓게”. 마음에 들 때까지 <b>여러 번</b>.</p></div></div>
+      <div class="step"><div class="num">5</div><div><b>반응형 확인</b><p>“<code class="i">폰에서도 잘 보이게 반응형으로</code>”를 꼭 한 번. 화면을 좁게 줄여 확인.</p></div></div>
+      <div class="step"><div class="num">6</div><div><b>내 흔적 남기기</b><p>맨 아래에 내 이름·한 줄 소감. 다음 시간엔 여기에 독후감을 이어 붙일 거예요.</p></div></div>
+    </div>
+    <p class="note" style="margin-top:12px">💡 <b>비법은 반복!</b> 한 번에 완벽하지 않아요. “이렇게 바꿔줘”를 <b>겁내지 말고</b> 계속 하세요. 그게 바이브코딩입니다.</p>
+  </section>
+
+  <section>
+    <h2><span class="dot"></span>오늘 끝나기 전 체크</h2>
+    <div class="check">☐ &nbsp;<span>제목 + <b>검증 카드 3개</b>가 있다.</span></div>
+    <div class="check">☐ &nbsp;<span>각 카드에 <b>소설 → 실제 → 판정</b>이 들어갔다.</span></div>
+    <div class="check">☐ &nbsp;<span><b>만져지는 것</b>(펼치기·그래프 등)이 하나 이상 있다.</span></div>
+    <div class="check">☐ &nbsp;<span>“<b>반응형으로</b>”를 넣어 폰에서도 잘 보인다.</span></div>
+    <div class="check">☐ &nbsp;<span>내 <b>이름·소감</b>을 남겼다.</span></div>
+  </section>
+
+  <footer>
+    <p>코드를 몰라도 괜찮아요. <b>무엇을 만들지 정확히 말하고, 계속 고쳐 말하는 것</b> — 오늘 그걸 해냅니다. 🚀</p>
+  </footer>
+
+</div>
+</body>
+</html>
