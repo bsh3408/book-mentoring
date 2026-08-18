@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>문해력 기출 · AI는 어떻게 다음 단어를 예측하는가</title>
+<style>
+  :root{
+    --paper:#e9eaee; --sheet:#ffffff; --ink:#141414; --ink2:#555; --line:#111; --soft:#f2f4f8; --teal:#0f766e; --amber:#b45309;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#0c0d10; --sheet:#15161a; --ink:#e7e7ea; --ink2:#a6a6ad; --line:#cfcfd2; --soft:#1c1e24; --teal:#5eead4; --amber:#fbbf5c; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"바탕","Batang","Noto Serif KR",serif; -webkit-text-size-adjust:100%}
+  .sheet{max-width:840px; margin:22px auto; background:var(--sheet); padding:32px 40px 46px; box-shadow:0 2px 14px rgba(0,0,0,.14)}
+  @media (max-width:560px){ .sheet{padding:22px 18px 34px; margin:0} }
+  .exam-head{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--line); padding-bottom:8px}
+  .exam-head .title{font-size:1.12rem; font-weight:700}
+  .exam-head .meta{font-size:.82rem; color:var(--ink2); text-align:right; line-height:1.5}
+  .direction{font-weight:700; margin:18px 0 12px; font-size:1rem}
+  .passage p{margin:0 0 11px; text-align:justify; text-indent:.6em; line-height:1.9; font-size:1.02rem}
+  .passage p:first-child{text-indent:0}
+  .mk{font-weight:800}
+  .footnote{font-size:.82rem; color:var(--ink2); border-top:1px solid #bbb; margin-top:12px; padding-top:8px}
+  .divider{border:0; border-top:1px solid #bbb; margin:24px 0}
+  .q{margin:22px 0}
+  .stem{font-weight:700; font-size:1.02rem; margin-bottom:8px; line-height:1.6}
+  .stem .pt{font-weight:400; color:var(--ink2); font-size:.85rem}
+  .boki{border:1px solid var(--line); margin:8px 0 12px; padding:12px 14px; font-family:"Malgun Gothic","맑은 고딕",sans-serif; font-size:.95rem; line-height:1.75}
+  .boki .bk{text-align:center; font-weight:700; letter-spacing:.25em; margin:0 0 6px; font-size:.88rem}
+  .opts{list-style:none; margin:0; padding:0}
+  .opt{display:flex; align-items:flex-start; gap:9px; padding:6px 6px; border-radius:6px; cursor:pointer; line-height:1.6}
+  .opt:hover{background:var(--soft)}
+  .opt input{width:16px;height:16px;margin:4px 0 0;flex:none;accent-color:var(--teal);cursor:pointer}
+  .opt:has(input:checked){background:var(--soft); font-weight:700}
+  .opt .n{flex:none}
+  details.key{margin-top:24px; border:1px solid var(--line); padding:12px 16px; font-family:"Malgun Gothic","맑은 고딕",sans-serif}
+  details.key summary{cursor:pointer; font-weight:800; color:var(--ink2); font-size:.9rem; list-style:none}
+  details.key summary::-webkit-details-marker{display:none}
+  details.key summary::before{content:"▶ "; font-size:.8em}
+  details.key[open] summary::before{content:"▼ "}
+  .key-body{margin-top:10px; font-size:.95rem; color:var(--ink2); line-height:1.9}
+  .key-body b{color:var(--ink)}
+  .skipmap{margin-top:10px; background:var(--soft); border-left:3px solid var(--amber); padding:9px 12px; font-size:.9rem}
+  .tie{margin-top:10px; background:var(--soft); border-left:3px solid var(--teal); padding:9px 12px; font-size:.9rem}
+  .tail{margin-top:26px; font-size:.8rem; color:var(--ink2); text-align:center; border-top:1px solid #bbb; padding-top:10px}
+  @media print{ body{background:#fff} .sheet{box-shadow:none;margin:0;max-width:none} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="exam-head">
+    <div class="title">문해력 기출 · 과학 비문학 [정보·AI]</div>
+    <div class="meta">AI는 어떻게 다음 단어를 예측하는가<br>제한 시간 · <b>9분</b></div>
+  </div>
+
+  <p class="direction">[1 ~ 3] 다음 글을 읽고 물음에 답하시오.</p>
+
+  <div class="passage">
+    <p>생성형 인공지능에게 질문을 하면 사람이 쓴 것 같은 자연스러운 문장이 돌아온다. 그러나 이 프로그램이 사람처럼 문장의 <span class="mk">의미</span>를 이해하고 답하는 것은 아니다. 그 속에서 실제로 일어나는 일은 훨씬 단순하다. 앞에 놓인 말들을 보고 <span class="mk">그다음에 올 단어</span>를 하나씩 예측해 이어 붙이는 것, 이것이 이런 인공지능이 하는 일의 거의 전부이다.</p>
+    <p>이 예측의 바탕은 학습 단계에서 만들어진다. 모델은 방대한 양의 글을 읽으며 ‘어떤 맥락 뒤에는 어떤 단어가 자주 따라오는가’라는 통계적 규칙을 익힌다. 예컨대 ‘하늘이 맑고 공기가’ 뒤에는 ‘맑다’나 ‘상쾌하다’가 올 가능성이 높고 ‘무겁다’가 올 가능성은 낮다. 이렇게 앞의 맥락을 조건으로 삼아 뒤에 올 수 있는 수많은 후보 단어 각각에 가능성의 크기를 배정한 것을 <span class="mk">확률 분포</span>라 한다.</p>
+    <p>글을 생성할 때 모델은 이 분포를 실제로 활용한다. 지금까지 만들어진 문장을 조건으로 다음 단어의 확률 분포를 구한 뒤, 그중에서 단어 하나를 고른다. 늘 가장 확률이 높은 것만 고르면 문장이 단조로워지므로, 확률에 비례해 다소 무작위로 뽑기도 한다. 이렇게 고른 단어를 문장 끝에 붙이고, 늘어난 문장을 다시 조건으로 삼아 그다음 단어를 예측한다. 이 과정을 한 단어씩 반복하며 긴 답변이 완성된다.</p>
+    <p>여기서 이 방식의 근본적인 한계가 드러난다. 모델이 단어를 고르는 기준은 그 내용이 <span class="mk">사실인가</span>가 아니라 학습한 글에서 그 단어가 <span class="mk">얼마나 자주, 그럴듯하게</span> 이어졌는가일 뿐이다. 그래서 학습 자료에 드물거나 아예 없던 사항에 대해서도 모델은 통계적으로 그럴듯한 단어들을 자신 있게 이어 붙인다. 그 결과 실제로는 존재하지 않는 논문이나 틀린 사실을, 마치 참인 것처럼 매끄럽게 만들어 내기도 하는데 이를 <span class="mk">환각</span>이라 한다. <span class="mk">㉠</span>그래서 어떤 개발자는 인공지능이 알려 준 함수의 이름을 그대로 믿지 않고 공식 문서에서 그것이 실제로 있는지 반드시 확인한다. <span class="mk">㉡</span>우리는 이런 태도가 환각이 부르는 위험을 줄이려는 것이라고 판단할 수 있다.</p>
+    <p>결국 이런 인공지능의 답은 ‘가장 그럴듯한 말’이지 ‘검증된 사실’이 아니다. 최근에는 답을 만들기 전에 외부 자료를 찾아 근거를 함께 제시하도록 보완하는 방법도 쓰이지만, 그렇게 붙인 근거가 옳은지, 답이 실제와 맞는지를 마지막으로 가려내는 몫은 여전히 그것을 쓰는 사람에게 있다.</p>
+    <div class="footnote">* 확률 분포 : 여러 후보에 각각 얼마만큼의 가능성을 배정해 놓은 것. &nbsp; * 환각(hallucination) : 인공지능이 사실이 아닌 내용을 사실처럼 그럴듯하게 만들어 내는 현상.</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="q">
+    <div class="stem">1. 윗글을 읽고 답할 수 있는 질문이 <u>아닌</u> 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q1"><span class="n">①</span> 생성형 인공지능은 다음 단어를 무엇을 근거로 고르는가?</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">②</span> 확률 분포는 학습의 어느 단계에서 만들어지는가?</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">③</span> 모델을 학습시키는 데 드는 전기 요금은 얼마인가?</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">④</span> 환각은 왜 생기는가?</label>
+      <label class="opt"><input type="radio" name="q1"><span class="n">⑤</span> 늘 가장 확률이 높은 단어만 고르지는 않는 까닭은 무엇인가?</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">2. 윗글을 바탕으로 &lt;보기&gt;를 이해한 내용으로 적절하지 <u>않은</u> 것은?</div>
+    <div class="boki">
+      <div class="bk">&lt; 보 기 &gt;</div>
+      한 학생이 생성형 인공지능에게 어떤 프로그램에서 특정 기능을 하는 함수의 이름을 물었다. 인공지능은 실제로는 존재하지 않는 함수 이름을 매끄러운 설명과 함께 자신 있게 알려 주었다. 학생이 그대로 코드에 넣고 실행하자 오류가 났다.
+    </div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q2"><span class="n">①</span> 인공지능은 그 함수가 실제로 있는지 확인한 뒤가 아니라, 그럴듯함을 근거로 이름을 이어 붙였겠군.</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">②</span> 설명이 매끄러웠던 것은 학습한 글에서 자주 이어지던 표현들을 통계적으로 골랐기 때문이겠군.</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">③</span> 그 함수에 관한 자료가 학습에 드물었어도 인공지능은 자신 있게 답을 만들어 냈겠군.</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">④</span> 인공지능이 답을 내놓은 것은 그 함수가 사실임을 스스로 검증했다는 뜻이겠군.</label>
+      <label class="opt"><input type="radio" name="q2"><span class="n">⑤</span> 학생이 공식 문서에서 미리 확인했다면 이 오류를 피할 수 있었겠군.</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">3. ㉠을 근거로 ㉡과 같이 판단하기 위해 반드시 전제되어야 하는 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q3"><span class="n">①</span> 공식 문서에는 오류가 전혀 없다.</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">②</span> 인공지능의 답은 사실 여부가 아니라 그럴듯함을 기준으로 만들어지므로 틀릴 수 있다.</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">③</span> 개발자는 인공지능보다 프로그래밍을 더 잘 안다.</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">④</span> 확률이 가장 높은 단어를 고르면 문장이 단조로워진다.</label>
+      <label class="opt"><input type="radio" name="q3"><span class="n">⑤</span> 학습에 쓰인 글의 양이 많을수록 예측은 정확해진다.</label>
+    </div>
+  </div>
+
+  <details class="key">
+    <summary>정답 및 스킵 지도 (교사용)</summary>
+    <div class="key-body">
+      <b>정답 · 1</b> ③ (‘전기 요금’은 글에 없음 — 글은 예측의 <b>원리·한계</b>만 다룸) &nbsp;·&nbsp;
+      <b>2</b> ④ (모델은 사실을 <b>검증하지 않고</b> 그럴듯함으로 고른다 — 4문단 정면 위배. 답을 냈다=검증했다는 잘못된 추론) &nbsp;·&nbsp;
+      <b>3</b> ②
+      <div class="skipmap">
+        <b>🔎 스킵 지도 — 어디 읽고 어디 넘길까</b><br>
+        · <b>1문단</b>(의미 이해가 아니라 다음 단어 예측) = <b>주제 한 줄.</b> 챙기고 스킵.<br>
+        · <b>2문단</b>(학습 → 확률 분포) = 1번 ②의 근거. 개념어 ‘확률 분포’만.<br>
+        · <b>3문단</b>(생성: 분포에서 뽑아 반복, 무작위성) = 1번 ⑤ 근거. 흐름만.<br>
+        · <b>4문단</b>(사실이 아니라 그럴듯함 → 환각, ㉠㉡) = <b>핵심.</b> 2·3번이 전부 여기서 갈린다. 정독.<br>
+        → <b>2·3번은 4문단만</b> 정확히 읽으면 풀린다. 1번만 전체를 훑는 문제.
+      </div>
+      <div class="tie">
+        <b>🚀 오늘 실습과 잇기</b> — 오늘 우리는 AI로 검증 웹앱을 만든다. 그런데 이 지문의 결론이 바로 오늘의 규칙이다: <b>“AI가 준 코드·과학 정보는 ‘그럴듯한 말’이지 검증된 사실이 아니다.”</b> AI가 짜 준 코드가 돌아가는지, 알려 준 과학 사실이 진짜인지 <b>공식 문서·자료로 확인하는 것</b>이 바로 독서멘토링 내내 해 온 팩트체크와 같은 일. 워밍업 → “그럼 오늘 내 웹앱에서 AI 말 중 뭘 검증해야 하지?”로 넘어가자.
+      </div>
+    </div>
+  </details>
+
+  <div class="tail">과학 비문학 · 정보/AI [언어 모델의 예측과 환각]. 수능형 3문항 구성 (지문은 수업용으로 재구성).</div>
+
+</div>
+</body>
+</html>
