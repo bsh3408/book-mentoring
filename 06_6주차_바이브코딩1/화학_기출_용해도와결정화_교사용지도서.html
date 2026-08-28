@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>교사용 지도서 · 용해도와 결정화 공정</title>
+<style>
+  :root{
+    --paper:#eef0f4; --sheet:#ffffff; --ink:#161616; --ink2:#565d6c; --line:#d7dbe2;
+    --teal:#0f766e; --teal-s:#e6f4f2; --amber:#b45309; --amber-s:#fdf3e6; --indigo:#4338ca; --indigo-s:#eceafe; --rose:#be123c; --rose-s:#fdeaef; --blue:#1d4ed8; --blue-s:#e7eefd;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0c0d10; --sheet:#15161a; --ink:#e8e8ec; --ink2:#a2a7b2; --line:#2a2d35;
+      --teal:#5eead4; --teal-s:#0f2b28; --amber:#fbbf5c; --amber-s:#33240f; --indigo:#a5b4fc; --indigo-s:#1e1b3a; --rose:#fb7185; --rose-s:#37141d; --blue:#93c5fd; --blue-s:#152238;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","맑은 고딕",system-ui,sans-serif; line-height:1.75; -webkit-text-size-adjust:100%}
+  .wrap{max-width:900px; margin:0 auto; padding:26px 20px 70px}
+  header.top{border-radius:16px; padding:28px 26px 24px; color:#fff;
+    background:linear-gradient(135deg,#0f766e,#1d4ed8); box-shadow:0 8px 26px rgba(29,78,216,.26)}
+  header.top .kk{font-size:.8rem; letter-spacing:.16em; opacity:.86; font-weight:700}
+  header.top h1{margin:.35em 0 .2em; font-size:1.55rem; line-height:1.32}
+  header.top p{margin:0; font-size:.94rem; opacity:.94}
+  .toc{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .toc a{font-size:.8rem; background:rgba(255,255,255,.16); color:#fff; text-decoration:none; padding:5px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.3)}
+
+  .card{background:var(--sheet); border:1px solid var(--line); border-radius:14px; padding:22px 24px; margin:18px 0; box-shadow:0 2px 10px rgba(0,0,0,.05); scroll-margin-top:14px}
+  .card h2{margin:0 0 6px; font-size:1.2rem; display:flex; align-items:center; gap:9px}
+  .card h2 .em{font-size:1.32rem}
+  .card h3{font-size:1.02rem; margin:18px 0 6px; color:var(--teal)}
+  .lead{color:var(--ink2); font-size:.92rem; margin:0 0 14px}
+  p.body-p{font-size:.96rem; margin:6px 0}
+
+  table.info{width:100%; border-collapse:collapse; font-size:.9rem; margin:6px 0}
+  table.info td{padding:6px 10px; border-bottom:1px solid var(--line)}
+  table.info td:first-child{color:var(--ink2); font-weight:700; width:110px; white-space:nowrap}
+
+  .concept{border:1px solid var(--line); border-radius:12px; padding:14px 16px; margin:10px 0; background:var(--paper)}
+  .concept b.term{color:var(--indigo); font-size:1rem}
+  .concept p{margin:5px 0 0; font-size:.92rem}
+  .compare{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:8px}
+  @media (max-width:560px){ .compare{grid-template-columns:1fr} }
+  .cbox{border-radius:12px; padding:13px 15px; font-size:.9rem}
+  .cbox.gas{background:var(--teal-s); border:1px solid var(--teal)}
+  .cbox.ress{background:var(--indigo-s); border:1px solid var(--indigo)}
+  .cbox .h{font-weight:800; margin-bottom:5px}
+  .cbox.gas .h{color:var(--teal)}
+  .cbox.ress .h{color:var(--indigo)}
+  .cbox ul{margin:4px 0 0; padding-left:18px}
+  .cbox li{margin:3px 0}
+
+  table.map{width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px}
+  table.map th, table.map td{border:1px solid var(--line); padding:8px 9px; vertical-align:top; text-align:left}
+  table.map th{background:var(--teal-s); color:var(--teal); font-weight:800; white-space:nowrap}
+
+  .qblock{border:1px solid var(--line); border-radius:12px; padding:16px 18px; margin:14px 0}
+  .qblock .qh{display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap}
+  .qblock .qh .num{font-weight:900; font-size:1.05rem}
+  .qblock .qh .ans{font-size:.78rem; font-weight:800; color:#fff; background:var(--rose); border-radius:999px; padding:3px 11px}
+  .qblock .focus{font-size:.86rem; color:var(--ink2); background:var(--paper); border-radius:8px; padding:8px 11px; margin:6px 0 10px}
+  .choice{border-bottom:1px dashed var(--line); padding:8px 0; font-size:.93rem}
+  .choice:last-child{border-bottom:0}
+  .choice .cn{font-weight:800; margin-right:4px}
+  .choice.correct{color:var(--teal)}
+  .choice.trap{color:var(--amber)}
+  .why{color:var(--ink2); font-size:.88rem; margin-top:2px}
+  .trapflag{display:inline-block; font-size:.72rem; font-weight:800; color:var(--amber); border:1px solid var(--amber); border-radius:999px; padding:0 8px; margin-left:5px}
+  .errbox{background:var(--rose-s); border-left:4px solid var(--rose); border-radius:0 10px 10px 0; padding:10px 13px; font-size:.88rem; margin-top:10px}
+
+  ol.script{margin:6px 0 0; padding-left:20px}
+  ol.script li{margin:8px 0; font-size:.94rem}
+  ol.script li b{color:var(--blue)}
+  .askbox{background:var(--blue-s); border-radius:8px; padding:8px 11px; font-size:.87rem; margin-top:4px; color:var(--ink2)}
+
+  .timeline{display:flex; flex-direction:column; gap:8px; margin-top:8px}
+  .trow{display:grid; grid-template-columns:70px 1fr; gap:12px; align-items:start; font-size:.92rem}
+  .trow .tm{font-weight:800; color:var(--teal); white-space:nowrap}
+
+  .chk{list-style:none; margin:8px 0 0; padding:0}
+  .chk li{position:relative; padding:6px 6px 6px 30px; font-size:.92rem; border-bottom:1px dashed var(--line)}
+  .chk li:last-child{border-bottom:0}
+  .chk li::before{content:"☐"; position:absolute; left:6px; top:5px; font-size:1.05rem; color:var(--teal)}
+
+  .note{font-size:.86rem; color:var(--ink2); background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-top:14px}
+  .note b{color:var(--ink)}
+  footer{text-align:center; color:var(--ink2); font-size:.8rem; margin-top:26px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kk">교사용 지도서 · 화학 비문학</div>
+    <h1>용해도와 결정화 공정 (23년 3월 고3 14~17번)</h1>
+    <p>지문 개관부터 문항별 전체 선지 해설, 발문 스크립트까지 — 이 문서 하나로 바로 수업 진행</p>
+    <div class="toc">
+      <a href="#overview">① 지문 개관</a>
+      <a href="#concepts">② 배경 개념</a>
+      <a href="#structure">③ 문단 구조</a>
+      <a href="#q14">④ 문항 해설</a>
+      <a href="#lesson">⑤ 수업 진행</a>
+      <a href="#error">⑥ 오답 유형</a>
+    </div>
+  </header>
+
+  <!-- 1. 개관 -->
+  <div class="card" id="overview">
+    <h2><span class="em">📋</span> ① 지문 개관</h2>
+    <table class="info">
+      <tr><td>출처</td><td>2023년 3월 고3 전국연합학력평가 14~17번</td></tr>
+      <tr><td>제재</td><td>화학 — 용해도·상평형·물질의 상태 변화(초임계 유체) 응용 공정</td></tr>
+      <tr><td>글의 성격</td><td>개념 정의형 + 공정 비교형 (원리 설명 → 두 공정 대조 → 원리 재확인)</td></tr>
+      <tr><td>난이도 요인</td><td>① 낯선 전문 용어 다수(입도·반응매·결정핵) ② 두 공정(GAS·RESS)의 구조적 유사성 때문에 헷갈림 ③ 17번은 표 자료 해석까지 요구</td></tr>
+      <tr><td>핵심 한 문장</td><td>“농도가 높을수록 결정핵이 많이 생기고, 결정핵이 많이 생기면 하나하나에 모이는 분자 수가 적어져 입자가 작아진다.”</td></tr>
+    </table>
+    <p class="lead" style="margin-top:10px">이 지문의 함정은 대부분 <b>GAS 공정과 RESS 공정을 헷갈리게</b> 설계되어 있다. 두 공정 모두 초임계 이산화탄소를 쓰지만, <b>이산화탄소의 역할이 정반대</b>(반응매 vs 용매)라는 것이 전체 문항을 관통하는 핵심 변별점이다.</p>
+  </div>
+
+  <!-- 2. 배경 개념 -->
+  <div class="card" id="concepts">
+    <h2><span class="em">🧪</span> ② 배경 개념 해설 (교사용 사전 지식)</h2>
+    <p class="lead">화학 비전공 교사도 이 개념 5개만 알면 학생 질문에 바로 답할 수 있다.</p>
+
+    <div class="concept">
+      <b class="term">용해도 · 과포화 · 결정화</b>
+      <p><b>용해도</b>=한계치. 그 한계를 넘어 억지로 녹아 있는 상태가 <b>과포화</b>다. 과포화는 불안정해서 <b>포화 상태로 돌아가려는 힘</b>이 있고, 그 힘 때문에 남는 용질이 고체로 튀어나오는 현상이 <b>결정화(석출)</b>다. 즉 이 지문 전체는 “어떻게 하면 혼합물을 인위적으로 과포화 상태로 만들 것인가”에 대한 두 가지 답(GAS·RESS)을 설명하는 글이다.</p>
+    </div>
+
+    <div class="concept">
+      <b class="term">초임계 유체</b>
+      <p>물질은 보통 고체·액체·기체로 나뉘지만, <b>임계 온도(액체로 있을 수 있는 최고 온도)</b>와 <b>임계 압력(기체로 있을 수 있는 최대 압력)</b>을 동시에 넘기면 액체도 기체도 아닌 <b>제4의 상태</b>가 된다. 분자 간 거리는 기체보다 가깝고 액체보다는 멀다 — 그래서 액체처럼 물질을 잘 녹이면서도 기체처럼 빠르게 퍼진다. 이 “둘의 장점을 가진 상태”라는 점이 결정화 공정에 쓰이는 이유다.</p>
+    </div>
+
+    <div class="concept">
+      <b class="term">왜 하필 이산화탄소인가</b>
+      <p>이산화탄소는 임계 온도가 <b>상온(약 31℃)</b>과 가까워서 살짝만 가열·가압해도 초임계 상태를 쉽게 만들 수 있다. 게다가 독성이 없어 약물 제조 같은 안전이 중요한 공정에 적합하다. (14번 ③⑤의 근거)</p>
+    </div>
+
+    <h3>GAS 공정 vs RESS 공정 — 이산화탄소의 역할이 정반대</h3>
+    <div class="compare">
+      <div class="cbox gas">
+        <div class="h">GAS 공정 — CO₂는 ‘반응매’</div>
+        <ul>
+          <li>출발: 용질이 <b>액체 용매</b>에 녹아 있는 혼합물(㉠)</li>
+          <li>초임계 CO₂를 <b>주입</b>하면 CO₂가 용매와 섞임</li>
+          <li>용매가 CO₂에 뺏겨 “포화될 수 있는 용질의 양”이 줄어듦</li>
+          <li>→ 남는 용질이 <b>고체로 석출</b></li>
+        </ul>
+      </div>
+      <div class="cbox ress">
+        <div class="h">RESS 공정 — CO₂는 ‘용매’ 그 자체</div>
+        <ul>
+          <li>출발: 물질이 애초에 <b>초임계 CO₂</b>에 녹아 있는 혼합물(㉡)</li>
+          <li>이 혼합물을 고압 → 대기압 용기로 <b>분사</b></li>
+          <li>압력이 급격히 낮아지며 CO₂가 <b>기체로 변함</b></li>
+          <li>→ CO₂(용매)가 사라지며 용질이 <b>고체로 석출</b></li>
+        </ul>
+      </div>
+    </div>
+    <p class="lead" style="margin-top:8px">즉 GAS는 “CO₂를 넣어서 원래 용매를 밀어낸다”, RESS는 “CO₂ 자체가 용매였다가 날아가 버린다”는 차이다. 15번은 이 차이를 정확히 알아야만 풀린다.</p>
+  </div>
+
+  <!-- 3. 문단 구조 -->
+  <div class="card" id="structure">
+    <h2><span class="em">🗺️</span> ③ 문단별 구조 분석</h2>
+    <table class="map">
+      <tr><th>문단</th><th>요지</th><th>글의 기능</th><th>연결 문항</th></tr>
+      <tr><td>1</td><td>용해도·과포화·결정화 정의, 결정화의 쓰임(제약 분야)</td><td>용어 정의 (사전)</td><td>14-④</td></tr>
+      <tr><td>2</td><td>초임계 상태란 무엇이며, 압력↑→밀도↑→입도 조절 가능</td><td>핵심 원리 제시</td><td><b>16번의 뿌리</b></td></tr>
+      <tr><td>3</td><td>GAS 공정 절차, ㉠(용매+용질 혼합물) 등장</td><td>공정①</td><td>15번 ㉠</td></tr>
+      <tr><td>4</td><td>농도↑ → 결정핵 多 → 입도 小 (공정 공통 원리)</td><td>공통 원리</td><td><b>16·17번의 뿌리</b></td></tr>
+      <tr><td>5</td><td>RESS 공정 절차, ㉡(CO₂+물질 혼합물) 등장, 입도 원리는 GAS와 동일</td><td>공정②</td><td>15번 ㉡</td></tr>
+      <tr><td>6</td><td>왜 CO₂를 쓰는가(임계온도 상온과 근접, 무독성)</td><td>보충</td><td>14-③⑤</td></tr>
+    </table>
+    <p class="lead" style="margin-top:8px">4문단의 원리(농도↑→결정핵 多→입도 小)가 <b>이 지문에서 가장 자주 재활용되는 문장</b>이다. 16번은 이걸 “압력”으로 바꿔 묻고, 17번은 이걸 “표의 숫자”로 바꿔 묻는다 — 같은 원리, 다른 옷.</p>
+  </div>
+
+  <!-- 4. 문항별 해설 -->
+  <div class="card" id="q14">
+    <h2><span class="em">✅</span> ④ 문항별 전체 선지 해설</h2>
+
+    <div class="qblock">
+      <div class="qh"><span class="num">14.</span> 윗글을 통해 알 수 있는 내용으로 적절하지 않은 것은? <span class="ans">정답 ②</span></div>
+      <div class="focus">유형: 세부 정보 확인 — 지문에 쓰인 표현을 정확히 대조하면 풀리는 문항.</div>
+      <div class="choice">① 초임계 CO₂를 용매로 사용해 용질을 석출 → <b>RESS 공정</b>이 정확히 이 방식(5문단). 일치.</div>
+      <div class="choice trap">② 반응매를 첨가하면 원래 있던 용매의 양이 줄어든다 <span class="trapflag">함정</span>
+        <div class="why">지문(3문단)은 “반응매가 용매와 섞이면서 <b>포화될 수 있는 용질의 양</b>이 줄어든다”고 했지, <b>용매의 실제 양(부피·질량)이 줄어든다</b>고 하지 않았다. ‘줄어드는 대상’을 용매 자체로 착각하게 만든 전형적 왜곡. → <b>이 선지가 정답(불일치)</b></div>
+      </div>
+      <div class="choice">③ CO₂는 액체로 존재할 수 있는 최고 온도(임계 온도)가 상온과 큰 차이 없음 → 6문단 그대로. 일치.</div>
+      <div class="choice">④ 과포화 → 포화로 돌아가려는 경향 때문에 석출 → 1문단 그대로. 일치.</div>
+      <div class="choice">⑤ 초임계 CO₂는 안전성 문제 없어 결정화 공정에 적합 → 6문단 “독성이 없어 안전성 문제에서도 자유롭다”. 일치.</div>
+    </div>
+
+    <div class="qblock">
+      <div class="qh"><span class="num">15.</span> ㉠과 ㉡에 대한 설명으로 가장 적절한 것은? <span class="ans">정답 ③</span></div>
+      <div class="focus">유형: 지시 대상 비교 — ㉠(GAS의 최초 혼합물)과 ㉡(RESS의 혼합물)의 <b>성분 차이</b>를 정확히 구분해야 함.</div>
+      <div class="choice trap">① ㉠과 달리 ㉡은 CO₂가 액체가 되는 과정에 쓰인다 <span class="trapflag">함정</span>
+        <div class="why">RESS에서 CO₂는 압력이 낮아지며 <b>기체</b>로 변하는 것이지 액체가 되는 게 아니다. 상태 변화 방향을 반대로 뒤집은 오답.</div>
+      </div>
+      <div class="choice">② ㉠과 달리 ㉡은 농도에 따라 석출 입자의 수가 정해진다 → 입도 결정 원리는 <b>두 공정이 동일</b>(5문단 “원리는 GAS 공정과 동일”). 차이가 있다는 전제 자체가 틀림.</div>
+      <div class="choice correct">③ ㉡과 달리 ㉠에는 용질이 CO₂가 아닌 용매에 녹아 있다 → 정확. ㉠=액체 용매+용질(3문단), ㉡=초임계 CO₂+물질(5문단).</div>
+      <div class="choice trap">④ ㉡과 달리 ㉠에는 임계 온도·압력 이상의 CO₂가 섞여 있다 <span class="trapflag">함정</span>
+        <div class="why">초임계(임계 온도·압력 이상) CO₂가 섞여 있는 쪽은 오히려 <b>㉡</b>이다(RESS는 처음부터 초임계 CO₂와 섞인 혼합물). ㉠은 CO₂가 <b>나중에 주입</b>되므로 이 시점엔 아직 안 섞여 있음. 주체를 뒤바꾼 오답.</div>
+      </div>
+      <div class="choice">⑤ ㉠과 ㉡ 모두 용매에 분사된다 → 분사되는 것은 <b>㉡(RESS)</b>뿐. ㉠(GAS)은 용기에 CO₂를 주입하는 방식이라 분사가 아님.</div>
+    </div>
+
+    <div class="qblock">
+      <div class="qh"><span class="num">16.</span> A에 들어갈 내용으로 가장 적절한 것은? <span class="ans">정답 ⑤</span></div>
+      <div class="focus">유형: 원리 적용(빈칸 추론) — 4문단의 “농도↑→결정핵 多→입도 小” 사슬을 “압력↑”이라는 새 조건에 대입.</div>
+      <div class="choice">추론 사슬: 압력을 높여 만든 포화 혼합물 → 2문단 “압력↑ → 밀도↑ → 더 많은 용질을 녹임” → 즉 <b>같은 부피에 용질 분자 수가 더 많아짐</b> → 4문단 “용질 분자가 많을수록 결정핵이 多 생성” → 결정핵 하나당 모이는 분자 수 적음 → <b>입도 小</b></div>
+      <div class="choice correct">⑤ 일정한 부피당 용질 분자의 수가 많아지기 → 이 사슬의 <b>첫 연결고리(원인)</b>를 정확히 짚음.</div>
+      <div class="choice trap">① 결정핵이 더 적게 생성되기 <span class="trapflag">함정</span>
+        <div class="why">입도가 작아지려면 결정핵은 <b>더 많이</b> 생겨야 한다(4문단). 방향이 정반대.</div>
+      </div>
+      <div class="choice">② 결정핵이 초임계 상태가 되기 → 결정핵은 <b>고체 입자의 씨앗</b>이지 초임계 상태와 무관한 개념. 지문에 없는 연결.</div>
+      <div class="choice">③ 초임계 유체의 임계 온도가 낮아지기 → 임계 온도는 물질의 고유한 값으로, 압력을 높인다고 바뀌지 않음.</div>
+      <div class="choice">④ 결정핵이 만들어지는 속도가 느려지기 → 지문은 결정핵의 <b>‘수’</b>를 다루지 ‘속도’를 다루지 않음. 다른 변인을 끌어옴.</div>
+    </div>
+
+    <div class="qblock">
+      <div class="qh"><span class="num">17.</span> &lt;보기&gt;를 이해한 내용으로 가장 적절한 것은? <span class="ans">정답 ②</span> <span style="font-size:.78rem;color:var(--ink2)">[3점 · 표 자료 해석]</span></div>
+      <div class="focus">유형: 자료 적용 — ㉮(농도0.01·속도20·입도35) / ㉯(농도0.03·속도20·입도25) / ㉰(농도0.03·속도5·입도70)</div>
+      <div class="choice">㉮→㉯ 비교: <b>농도만 다름(0.01→0.03)</b>, 입도는 35→25로 작아짐 → “농도↑→결정핵 多→입도 小” 원리를 그대로 보여주는 짝.</div>
+      <div class="choice correct">② ㉮보다 ㉯에서 입도가 작은 것은 결정핵 하나에 모인 분자 수가 적기 때문 → 4문단 원리 그대로 적용. 정답.</div>
+      <div class="choice trap">① ㉮·㉯ 입도 차이가 CO₂에 <b>녹는 A의 양</b>이 다르기 때문 <span class="trapflag">함정</span>
+        <div class="why">&lt;보기&gt; 단서에 “혼합물에 녹아 있는 용질은 <b>모두 석출</b>된다”고 명시. CO₂에 녹는 양의 차이라는 설명 자체가 조건과 모순.</div>
+      </div>
+      <div class="choice">③ ㉯·㉰는 <b>섞이는 속도</b>는 달라도 <b>과포화되는 속도</b>는 같다 → CO₂ 주입 속도가 다르면(20 vs 5) 과포화에 이르는 속도도 달라진다고 보는 게 자연스러움. 근거 없이 “같다”고 단정.</div>
+      <div class="choice">④ 입도가 달라도 석출된 A의 양은 모두 같다 → &lt;보기&gt; 단서(녹아 있는 용질 모두 석출, 혼합물 양 동일)상 <b>양은 같을 수 있으나</b>, 이 선지가 매력적인 이유는 따로 있음(아래 강의 팁 참고). 다만 정답 판단의 핵심은 ②이므로 상대적으로 후순위.</div>
+      <div class="choice">⑤ ㉯가 과포화되는 속도가 가장 느려 입도가 가장 작다 → 입도가 가장 작은 것과 과포화 속도를 임의로 연결. 지문은 “농도”가 입도를 결정한다고 했지 과포화 <b>속도</b>가 입도를 결정한다고 하지 않음.</div>
+      <div class="note" style="margin-top:8px"><b>강의 팁</b> — 17번은 3점 문항답게 함정이 촘촘하다. 학생에게 “㉮㉯㉰ 표에서 <b>바뀐 변인이 뭐고 고정된 변인이 뭔지</b>부터 표시해 보라”고 시키면(㉮↔㉯: 농도만 변화 / ㉯↔㉰: 속도만 변화) 대조 구도가 한눈에 들어온다. 이것이 바로 역방향 표적 독해의 표 버전이다.</div>
+    </div>
+  </div>
+
+  <!-- 5. 수업 진행 -->
+  <div class="card" id="lesson">
+    <h2><span class="em">🗣️</span> ⑤ 수업 진행 가이드 (발문 스크립트)</h2>
+    <p class="lead">지문을 다 읽히기 전에 아래 순서로 짚어 주면 역방향 표적 독해가 자연스럽게 체화된다.</p>
+    <ol class="script">
+      <li><b>문제부터 훑기.</b> “14~17번 선지를 먼저 쭉 훑어봐. 뭘 자꾸 물어보는 것 같아?”
+        <div class="askbox">기대 답: “GAS랑 RESS 차이”, “압력·농도 관련 계산” 등 — 표적을 스스로 장전하게 만드는 질문.</div>
+      </li>
+      <li><b>1~2문단 읽고 멈추기.</b> “초임계 상태가 뭔지 네 말로 설명해 봐.”
+        <div class="askbox">“액체도 기체도 아닌 제3의 상태”까지만 나와도 충분. 여기서 16번의 뿌리(압력↑→밀도↑)를 미리 심어 둔다.</div>
+      </li>
+      <li><b>3·5문단 읽고 바로 대조표 그리기.</b> “㉠엔 뭐가 녹아 있고, ㉡엔 뭐가 녹아 있어? 표로 그려 봐.”
+        <div class="askbox">이 대조표 하나로 15번이 즉시 풀린다는 걸 직접 경험하게 한다.</div>
+      </li>
+      <li><b>4문단에서 강제로 멈추기.</b> “이 문장(농도↑→결정핵 多→입도 小)에 형광펜 쳐. 이거 오늘 문제 두 개(16·17)에서 또 나올 거야.”</li>
+      <li><b>17번 풀기 전, 표부터 시키기.</b> “㉮㉯㉰ 중에 뭐랑 뭐가 한 가지 조건만 다른지 짝 지어 봐.”</li>
+    </ol>
+    <div class="timeline">
+      <div class="trow"><span class="tm">0~1분</span><span>선지 훑어보기 (표적 장전)</span></div>
+      <div class="trow"><span class="tm">1~4분</span><span>지문 읽기 (문단별 멈춤 발문 포함)</span></div>
+      <div class="trow"><span class="tm">4~8분</span><span>14~17번 풀기</span></div>
+      <div class="trow"><span class="tm">8~10분</span><span>채점 후 근거 되묻기 (아래 ⑥ 참고)</span></div>
+    </div>
+  </div>
+
+  <!-- 6. 오답 유형 & 되묻기 -->
+  <div class="card" id="error">
+    <h2><span class="em">🩺</span> ⑥ 예상 오답 유형과 되묻기</h2>
+    <div class="errbox"><b>14번을 틀렸다면</b> → ‘포화될 수 있는 용질의 양’과 ‘용매의 실제 양’을 구분 못 한 것. “용매 자체가 줄었다는 문장이 지문 어디 있어?”라고 되묻기.</div>
+    <div class="errbox" style="margin-top:8px"><b>15번을 틀렸다면</b> → GAS·RESS 두 공정이 헷갈리는 것. “㉠㉡ 각각 CO₂가 언제 등장해? 처음부터야, 나중에 주입돼?”로 시점을 구분시키기.</div>
+    <div class="errbox" style="margin-top:8px"><b>16번을 틀렸다면</b> → 원리를 통째로 외웠지 <b>인과 사슬</b>로 못 쪼갠 것. “압력↑ 다음에 뭐가 바뀌고, 그다음엔 뭐가 바뀌어?”를 한 단계씩 짚기.</div>
+    <div class="errbox" style="margin-top:8px"><b>17번을 틀렸다면</b> → 표를 읽지 않고 선지 문장만 읽고 판단한 것. “①번이 맞으려면 &lt;보기&gt;의 어느 조건이랑 모순돼?”로 &lt;보기&gt; 단서를 다시 보게 하기.</div>
+    <p class="lead" style="margin-top:14px">✅ 이번 주 되묻기 체크리스트 (지난주 “정답 맞혔다고 실력이라 확신하지 말 것” 피드백과 이어짐)</p>
+    <ul class="chk">
+      <li>맞은 문항도 “왜 이 선지가 맞는지” 지문 문장으로 설명시켰는가</li>
+      <li>15번의 ㉠㉡ 대조표를 학생이 직접 그렸는가 (내가 대신 그려 주지 않았는가)</li>
+      <li>16·17번이 같은 원리(4문단)에서 나온다는 것을 학생이 스스로 발견했는가</li>
+      <li>9분(권장 시간) 안에 풀었는지, 시간이 넘었다면 어느 문항에서 막혔는지 기록했는가</li>
+    </ul>
+  </div>
+
+  <div class="note">📎 학생용 문제지는 <b>화학_기출_용해도와결정화_23년3월고3.html</b> (같은 폴더). 이 지도서는 교사가 채점 후 되묻기·설명에 쓰는 참고 자료로, 학생에게 직접 보여주는 용도가 아니다.</div>
+
+  <footer>교사용 지도서 · 화학 비문학 [용해도와 결정화 공정] · 23년 3월 고3 14~17번</footer>
+
+</div>
+</body>
+</html>
