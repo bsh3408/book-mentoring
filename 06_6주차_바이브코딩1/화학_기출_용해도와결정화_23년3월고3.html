@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>화학 기출 · 용해도와 결정화 공정</title>
+<style>
+  :root{
+    --paper:#e9eaee; --sheet:#ffffff; --ink:#141414; --ink2:#555; --line:#111; --soft:#f2f4f8; --teal:#0f766e; --amber:#b45309;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#0c0d10; --sheet:#15161a; --ink:#e7e7ea; --ink2:#a6a6ad; --line:#cfcfd2; --soft:#1c1e24; --teal:#5eead4; --amber:#fbbf5c; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"바탕","Batang","Noto Serif KR",serif; -webkit-text-size-adjust:100%}
+  .sheet{max-width:860px; margin:22px auto; background:var(--sheet); padding:32px 40px 46px; box-shadow:0 2px 14px rgba(0,0,0,.14)}
+  @media (max-width:560px){ .sheet{padding:22px 18px 34px; margin:0} }
+  .exam-head{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--line); padding-bottom:8px}
+  .exam-head .title{font-size:1.12rem; font-weight:700}
+  .exam-head .meta{font-size:.82rem; color:var(--ink2); text-align:right; line-height:1.5}
+  .direction{font-weight:700; margin:18px 0 12px; font-size:1rem}
+  .passage p{margin:0 0 11px; text-align:justify; text-indent:.6em; line-height:1.9; font-size:1.02rem}
+  .passage p:first-child{text-indent:0}
+  .mk{font-weight:800}
+  .passage u{text-underline-offset:3px}
+  .footnote{font-size:.82rem; color:var(--ink2); border-top:1px solid #bbb; margin-top:12px; padding-top:8px}
+  .divider{border:0; border-top:1px solid #bbb; margin:24px 0}
+  .q{margin:22px 0}
+  .stem{font-weight:700; font-size:1.02rem; margin-bottom:8px; line-height:1.6}
+  .stem .pt{font-weight:400; color:var(--ink2); font-size:.85rem}
+  .boki{border:1px solid var(--line); margin:8px 0 12px; padding:12px 14px; font-family:"Malgun Gothic","맑은 고딕",sans-serif; font-size:.95rem; line-height:1.75}
+  .boki .bk{text-align:center; font-weight:700; letter-spacing:.25em; margin:0 0 6px; font-size:.88rem}
+  .boki .blank{display:inline-block; border:1px solid var(--ink); border-radius:4px; padding:0 10px; font-weight:700}
+  table.data{width:100%; border-collapse:collapse; margin-top:10px; font-size:.9rem; font-family:"Malgun Gothic","맑은 고딕",sans-serif}
+  table.data th, table.data td{border:1px solid var(--line); padding:6px 8px; text-align:center}
+  table.data th{background:var(--soft)}
+  .opts{list-style:none; margin:0; padding:0}
+  .opt{display:flex; align-items:flex-start; gap:9px; padding:6px 6px; border-radius:6px; cursor:pointer; line-height:1.6}
+  .opt:hover{background:var(--soft)}
+  .opt input{width:16px;height:16px;margin:4px 0 0;flex:none;accent-color:var(--teal);cursor:pointer}
+  .opt:has(input:checked){background:var(--soft); font-weight:700}
+  .opt .n{flex:none}
+  details.key{margin-top:24px; border:1px solid var(--line); padding:12px 16px; font-family:"Malgun Gothic","맑은 고딕",sans-serif}
+  details.key summary{cursor:pointer; font-weight:800; color:var(--ink2); font-size:.9rem; list-style:none}
+  details.key summary::-webkit-details-marker{display:none}
+  details.key summary::before{content:"▶ "; font-size:.8em}
+  details.key[open] summary::before{content:"▼ "}
+  .key-body{margin-top:10px; font-size:.95rem; color:var(--ink2); line-height:1.9}
+  .key-body b{color:var(--ink)}
+  .skipmap{margin-top:10px; background:var(--soft); border-left:3px solid var(--amber); padding:9px 12px; font-size:.9rem}
+  .tie{margin-top:10px; background:var(--soft); border-left:3px solid var(--teal); padding:9px 12px; font-size:.9rem}
+  .tail{margin-top:26px; font-size:.8rem; color:var(--ink2); text-align:center; border-top:1px solid #bbb; padding-top:10px}
+  @media print{ body{background:#fff} .sheet{box-shadow:none;margin:0;max-width:none} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="exam-head">
+    <div class="title">화학 비문학 기출 [23년 3월 고3 14~17번]</div>
+    <div class="meta">용해도와 결정화 공정<br>제한 시간 · <b>10분</b></div>
+  </div>
+
+  <p class="direction">[14 ~ 17] 다음 글을 읽고 물음에 답하시오.</p>
+
+  <div class="passage">
+    <p>용해도는 일정한 온도에서 일정한 양의 용매에 최대로 녹을 수 있는 용질의 양으로, 보통 용매 100g에 녹을 수 있는 용질의 질량이다. 혼합물의 과포화 상태는 용질이 용해도 이상으로 녹아 있는 상태인데, 과포화 상태의 혼합물은 포화 상태로 돌아가려는 경향이 있다. 결정화는 포화 상태의 혼합물이 과포화 상태가 되어 용질이 고체 입자로 석출되는 것으로 결정화 공정을 거치면 입도*가 작은 고체 입자를 얻을 수 있다. 이러한 결정화 공정은 약물의 생체 흡수율을 높여야 하는 제약 분야 등에서 사용된다.</p>
+    <p>결정화 공정에서는 초임계 유체를 쓰는 경우가 많다. 물질은 임계 온도와 임계 압력 이상에서 초임계 상태로 존재한다. 임계 온도는 어떤 물질이 액체로 존재할 수 있는 최고 온도이고, 임계 압력은 어떤 물질이 기체로 존재할 수 있는 최대 압력이다. 온도와 압력이 임계 온도와 임계 압력 이상일 때 물질은 액체도 아니고 기체도 아닌 초임계 상태로 존재한다. 초임계 상태에서 물질의 분자 간 거리는 그 물질이 기체일 때보다는 가깝지만 액체일 때만큼 가깝지는 않다. 물질이 액체일 때보다는 초임계 상태거나 기체일 때 용질이나 용매가 더 자유롭게 이동할 수 있다. 또한 초임계 유체에 가해지는 압력을 높이면 밀도가 높아져 더 많은 양의 용질을 녹일 수 있어 초임계 유체를 이용한 결정화 공정에서는 고체 입자의 입도를 조절할 수 있다.</p>
+    <p>GAS 공정에서는 초임계 이산화 탄소를 반응매로 사용하여 <span class="mk">㉠</span><u>혼합물</u>에 녹아 있는 용질을 작은 입도의 고체로 석출하는 경우가 많다. 반응매는 용질을 녹이지 않고 용매와 잘 섞이는 물질로, 반응매를 혼합물에 첨가하면 반응매는 용매와 섞이고 용질은 고체 입자로 석출된다. GAS 공정에서는 결정화하려는 물질을 액체 용매에 녹여서 혼합물을 만들고 용기에 적당량 채운 뒤 용기를 밀폐한다. 이후 용기의 온도와 압력을 이산화 탄소와 액체 용매의 임계 온도와 임계 압력의 사이에 맞추고 초임계 이산화 탄소를 용기에 주입한다. 그러면 혼합물이 과포화 상태가 되고 녹아 있던 용질은 고체 입자로 석출된다. 반응매가 용매와 섞이면서 포화될 수 있는 용질의 양이 줄어드는 것이다. 석출되는 용질의 양은 처음에 채운 혼합물의 양이 같다면 그 농도에 의해 정해진다.</p>
+    <p>결정화 공정에서 고체 입자를 석출할 때는 우선 일정한 수의 용질 분자가 모여서 집합체를 이루어 결정핵이 생성되어야 한다. 혼합물의 농도가 높을수록 결정핵을 만들 수 있는 용질 분자의 수가 많아 결정핵이 많이 생긴다. 결정핵이 많이 생성되면 하나의 결정핵에 모일 수 있는 용질 분자의 수가 적어져서 고체 입자의 크기는 작아지게 된다.</p>
+    <p>한편 초임계 이산화 탄소를 용매로 사용하는 결정화 공정도 있다. RESS 공정에서는 결정화하려는 물질과 초임계 이산화 탄소가 섞인 <span class="mk">㉡</span><u>혼합물</u>을 고압의 용기에서 대기압을 유지하는 용기로 분사한다. 분사 직후 초임계 이산화 탄소는 빠르게 압력이 내려가고 기체로 변화하는 과정에서 용질이 고체 입자로 석출된다. 이때 혼합물에서 결정핵이 생성되는데, 석출되는 고체 입자의 입도가 정해지는 원리는 GAS 공정과 동일하다.</p>
+    <p>GAS 공정과 RESS 공정 등의 결정화 공정에서는 이산화 탄소가 주로 쓰인다. 이산화 탄소는 임계 온도가 상온과 큰 차이가 없어 온도를 조금만 올리고 압력을 올리면 쉽게 초임계 상태로 만들 수 있기 때문이다. 초임계 이산화 탄소를 이용하면 압력을 조절하여 석출되는 고체 입자의 입도를 작게 만들 수 있을 뿐 아니라 그 자체로 독성이 없어서 안전성 문제에서도 자유롭다.</p>
+    <div class="footnote">* 입도 : 입자 하나하나의 평균 지름.</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="q">
+    <div class="stem">14. 윗글을 통해 알 수 있는 내용으로 적절하지 <u>않은</u> 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q14"><span class="n">①</span> 초임계 이산화 탄소를 용매로 사용하여 용질을 석출할 수 있다.</label>
+      <label class="opt"><input type="radio" name="q14"><span class="n">②</span> 혼합물에 반응매를 첨가하면 원래 있던 용매의 양이 줄어든다.</label>
+      <label class="opt"><input type="radio" name="q14"><span class="n">③</span> 이산화 탄소는 액체로 존재할 수 있는 최고 온도가 상온과 큰 차이가 없다.</label>
+      <label class="opt"><input type="radio" name="q14"><span class="n">④</span> 과포화 상태의 혼합물이 포화 상태로 돌아가려는 경향으로 인해 용질이 석출된다.</label>
+      <label class="opt"><input type="radio" name="q14"><span class="n">⑤</span> 초임계 이산화 탄소는 안전성 측면에서 문제가 없어 결정화 공정에 쓰이기에 적합하다.</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">15. ㉠과 ㉡에 대한 설명으로 가장 적절한 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q15"><span class="n">①</span> ㉠과 달리, ㉡은 초임계 이산화 탄소가 액체가 되는 과정에 사용된다.</label>
+      <label class="opt"><input type="radio" name="q15"><span class="n">②</span> ㉠과 달리, ㉡은 농도에 따라서 석출되는 고체 입자의 수가 정해진다.</label>
+      <label class="opt"><input type="radio" name="q15"><span class="n">③</span> ㉡과 달리, ㉠에는 용질이 초임계 이산화 탄소가 아닌 용매에 녹아 있다.</label>
+      <label class="opt"><input type="radio" name="q15"><span class="n">④</span> ㉡과 달리, ㉠에는 임계 온도와 임계 압력 이상의 이산화 탄소가 섞여 있다.</label>
+      <label class="opt"><input type="radio" name="q15"><span class="n">⑤</span> ㉠과 ㉡은 모두 결정화 공정에서 용매에 분사된다.</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">16. 윗글을 바탕으로 할 때, <span class="mk">A</span>에 들어갈 내용으로 가장 적절한 것은?</div>
+    <div class="boki">
+      초임계 유체를 용매로 사용하여 포화 상태의 혼합물을 만들려고 한다. 이때 포화 상태의 혼합물을 더 높은 압력에서 만들면 결정화 공정을 통해 석출되는 고체 입자의 입도는 더 작아지는데, 이는 <span class="blank">&nbsp;&nbsp;A&nbsp;&nbsp;</span> 때문이다.
+    </div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q16"><span class="n">①</span> 결정핵이 더 적게 생성되기</label>
+      <label class="opt"><input type="radio" name="q16"><span class="n">②</span> 결정핵이 초임계 상태가 되기</label>
+      <label class="opt"><input type="radio" name="q16"><span class="n">③</span> 초임계 유체의 임계 온도가 낮아지기</label>
+      <label class="opt"><input type="radio" name="q16"><span class="n">④</span> 결정핵이 만들어지는 속도가 느려지기</label>
+      <label class="opt"><input type="radio" name="q16"><span class="n">⑤</span> 일정한 부피당 용질 분자의 수가 많아지기</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">17. 윗글을 바탕으로 &lt;보기&gt;를 이해한 내용으로 가장 적절한 것은? <span class="pt">[3점]</span></div>
+    <div class="boki">
+      <div class="bk">&lt; 보 기 &gt;</div>
+      용질 A를 용매 B에 녹여 혼합물을 만들고 용기에 담은 후 용기의 압력을 높였다. 이후 용기에 초임계 이산화 탄소를 주입하여 A를 석출하는 실험을 통해 아래의 ㉮~㉰와 같은 결과를 얻었다. (단, 사용된 혼합물의 양은 같고 혼합물에 녹아 있는 용질은 모두 석출된다고 가정한다.)
+      <table class="data">
+        <tr><th></th><th>혼합물의 농도(g/mL)</th><th>초임계 이산화 탄소를<br>주입하는 속도(mL/s)</th><th>석출된 A의 입도(㎛)</th></tr>
+        <tr><td>㉮</td><td>0.01</td><td>20</td><td>35</td></tr>
+        <tr><td>㉯</td><td>0.03</td><td>20</td><td>25</td></tr>
+        <tr><td>㉰</td><td>0.03</td><td>5</td><td>70</td></tr>
+      </table>
+    </div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q17"><span class="n">①</span> ㉮와 ㉯에서 석출된 A의 입도가 차이가 나는 것은 초임계 이산화 탄소에 녹는 A의 양이 다르기 때문이겠군.</label>
+      <label class="opt"><input type="radio" name="q17"><span class="n">②</span> ㉮보다 ㉯에서 석출된 A의 입도가 더 작은 것은 하나의 결정핵에 모인 용질 분자의 수가 적기 때문이겠군.</label>
+      <label class="opt"><input type="radio" name="q17"><span class="n">③</span> ㉯와 ㉰에서 초임계 이산화 탄소와 B가 섞이는 속도는 다르지만 과포화되는 속도는 같겠군.</label>
+      <label class="opt"><input type="radio" name="q17"><span class="n">④</span> ㉮~㉰에서 석출된 A의 입도는 차이가 나더라도 각각에서 석출된 A의 양은 모두 같겠군.</label>
+      <label class="opt"><input type="radio" name="q17"><span class="n">⑤</span> ㉯가 과포화되는 속도는 ㉮와 ㉰보다 느리기 때문에 ㉯에서 석출된 A의 입도가 가장 작겠군.</label>
+    </div>
+  </div>
+
+  <details class="key">
+    <summary>정답 및 스킵 지도 (교사용)</summary>
+    <div class="key-body">
+      <b>정답 · 14</b> ② (반응매를 첨가하면 <b>용매의 양이 줄어드는 게 아니라</b>, 반응매가 용매와 섞이며 ‘포화될 수 있는 용질의 양’이 줄어드는 것 — 3문단 곡해) &nbsp;·&nbsp;
+      <b>15</b> ③ (㉠=GAS 공정 초기 혼합물: 용질이 <b>액체 용매</b>에 녹아 있음. ㉡=RESS 공정 혼합물: 용질이 <b>초임계 이산화 탄소</b>에 녹아 있음) &nbsp;·&nbsp;
+      <b>16</b> ⑤ (압력↑ → 밀도↑ → 부피당 용질 분자 수↑ → 결정핵 <b>더 많이</b> 생성 → 결정핵 하나당 모이는 분자 수 적어짐 → 입도 작아짐) &nbsp;·&nbsp;
+      <b>17</b> ②
+      <div class="skipmap">
+        <b>🔎 스킵 지도 — 어디 읽고 어디 넘길까</b><br>
+        · <b>1문단</b>(용해도·과포화·결정화 정의) = <b>용어 사전.</b> 14번 ④의 근거만 챙기고 스킵.<br>
+        · <b>2문단</b>(초임계 상태·압력↑→밀도↑→입도 조절) = 16번의 <b>핵심 원리.</b> 정독.<br>
+        · <b>3문단</b>(GAS 공정, ㉠) = 15번 표적. ㉠이 ‘액체 용매+용질’ 혼합물임을 확인.<br>
+        · <b>4문단</b>(농도↑→결정핵 多→입도 小) = 16·17번 <b>공통 원리.</b> 이 한 문장이 두 문항을 다 푼다.<br>
+        · <b>5문단</b>(RESS 공정, ㉡) = 15번 표적. ㉡이 ‘초임계 CO₂+용질’ 혼합물임을 확인.<br>
+        · <b>6문단</b>(CO₂를 쓰는 이유) = 14번 ③⑤의 근거. 한 줄만.<br>
+        → <b>15번은 3·5문단만</b> 대조하면 풀리고, <b>16·17번은 4문단의 ‘농도↑→결정핵 多→입도 小’ 원리 하나</b>로 다 풀린다.
+      </div>
+      <div class="tie">
+        <b>🚀 책과 잇기</b> — 『마션』에서 와트니가 만든 물, 『프로젝트 헤일메리』의 생명 유지 장치처럼 SF에는 ‘물질을 원하는 형태·크기로 정제·가공’하는 장면이 자주 나온다. 이 지문의 결정화 공정(입도를 작게 만들어 약물 흡수율을 높이는 것)이 바로 그 현실판 — 소설 속 기술이 실제로는 온도·압력·농도를 세밀하게 조절하는 정교한 공정임을 확인하는 계기로 연결해도 좋다.
+      </div>
+    </div>
+  </details>
+
+  <div class="tail">화학 비문학 · 23년 3월 고3 14~17번 [용해도와 결정화 공정]. 지문·문항은 기출 원본 그대로.</div>
+
+</div>
+</body>
+</html>
