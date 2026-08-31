@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>물리 기출 · 충돌과 운동량</title>
+<style>
+  :root{
+    --paper:#e9eaee; --sheet:#ffffff; --ink:#141414; --ink2:#555; --line:#111; --soft:#f2f4f8; --teal:#0f766e; --amber:#b45309;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --paper:#0c0d10; --sheet:#15161a; --ink:#e7e7ea; --ink2:#a6a6ad; --line:#cfcfd2; --soft:#1c1e24; --teal:#5eead4; --amber:#fbbf5c; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"바탕","Batang","Noto Serif KR",serif; -webkit-text-size-adjust:100%}
+  .sheet{max-width:860px; margin:22px auto; background:var(--sheet); padding:32px 40px 46px; box-shadow:0 2px 14px rgba(0,0,0,.14)}
+  @media (max-width:560px){ .sheet{padding:22px 18px 34px; margin:0} }
+  .exam-head{display:flex; justify-content:space-between; align-items:flex-end; border-bottom:2.5px solid var(--line); padding-bottom:8px}
+  .exam-head .title{font-size:1.12rem; font-weight:700}
+  .exam-head .meta{font-size:.82rem; color:var(--ink2); text-align:right; line-height:1.5}
+  .direction{font-weight:700; margin:18px 0 12px; font-size:1rem}
+  .passage p{margin:0 0 11px; text-align:justify; text-indent:.6em; line-height:1.9; font-size:1.02rem}
+  .passage p:first-child{text-indent:0}
+  .mk{font-weight:800}
+  .footnote{font-size:.82rem; color:var(--ink2); border-top:1px solid #bbb; margin-top:12px; padding-top:8px}
+  .divider{border:0; border-top:1px solid #bbb; margin:24px 0}
+  .q{margin:22px 0}
+  .stem{font-weight:700; font-size:1.02rem; margin-bottom:8px; line-height:1.6}
+  .stem .pt{font-weight:400; color:var(--ink2); font-size:.85rem}
+  .boki{border:1px solid var(--line); margin:8px 0 12px; padding:12px 14px; font-family:"Malgun Gothic","맑은 고딕",sans-serif; font-size:.95rem; line-height:1.75}
+  .boki .bk{text-align:center; font-weight:700; letter-spacing:.25em; margin:0 0 6px; font-size:.88rem}
+  .opts{list-style:none; margin:0; padding:0}
+  .opt{display:flex; align-items:flex-start; gap:9px; padding:6px 6px; border-radius:6px; cursor:pointer; line-height:1.6}
+  .opt:hover{background:var(--soft)}
+  .opt input{width:16px;height:16px;margin:4px 0 0;flex:none;accent-color:var(--teal);cursor:pointer}
+  .opt:has(input:checked){background:var(--soft); font-weight:700}
+  .opt .n{flex:none}
+  details.key{margin-top:24px; border:1px solid var(--line); padding:12px 16px; font-family:"Malgun Gothic","맑은 고딕",sans-serif}
+  details.key summary{cursor:pointer; font-weight:800; color:var(--ink2); font-size:.9rem; list-style:none}
+  details.key summary::-webkit-details-marker{display:none}
+  details.key summary::before{content:"▶ "; font-size:.8em}
+  details.key[open] summary::before{content:"▼ "}
+  .key-body{margin-top:10px; font-size:.95rem; color:var(--ink2); line-height:1.9}
+  .key-body b{color:var(--ink)}
+  .skipmap{margin-top:10px; background:var(--soft); border-left:3px solid var(--amber); padding:9px 12px; font-size:.9rem}
+  .tie{margin-top:10px; background:var(--soft); border-left:3px solid var(--teal); padding:9px 12px; font-size:.9rem}
+  .tail{margin-top:26px; font-size:.8rem; color:var(--ink2); text-align:center; border-top:1px solid #bbb; padding-top:10px}
+  /* 그림 */
+  .fig{border:1px solid var(--line); border-radius:8px; padding:14px; margin:10px 0 14px; background:var(--soft); font-family:"Malgun Gothic","맑은 고딕",sans-serif; font-size:.86rem}
+  .fig .cap{text-align:center; font-weight:700; margin-bottom:10px}
+  .track{display:flex; align-items:center; justify-content:center; gap:18px; margin:8px 0}
+  .ball{display:flex; flex-direction:column; align-items:center; gap:4px}
+  .ball .dot{width:38px; height:38px; border-radius:50%; background:var(--ink); color:var(--soft); display:flex; align-items:center; justify-content:center; font-weight:800}
+  .ball .v{font-size:.8rem}
+  .arrow{font-size:1.3rem}
+  .point{font-size:1.4rem}
+  .stagelbl{text-align:center; font-size:.78rem; color:var(--ink2); margin-top:4px}
+  .lump{width:66px; height:38px; border-radius:8px; background:var(--ink); color:var(--soft); display:flex; align-items:center; justify-content:center; font-weight:800; font-size:.82rem}
+  @media print{ body{background:#fff} .sheet{box-shadow:none;margin:0;max-width:none} }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="exam-head">
+    <div class="title">물리 비문학 기출 [13년 11월 고2 B형 24~26번]</div>
+    <div class="meta">충돌과 운동량·운동에너지<br>제한 시간 · <b>9분</b></div>
+  </div>
+
+  <p class="direction">[24 ~ 26] 다음 글을 읽고 물음에 답하시오.</p>
+
+  <div class="passage">
+    <p>다양한 충돌 현상들을 물리학에서는 어떻게 설명하고 있을까? 충돌 현상을 이해하기 위해서는 먼저 운동량과 운동에너지에 대해 알아야 한다.</p>
+    <p>운동량은 ‘P(운동량)=m(질량)×v(속도)’로 나타내며 크기와 방향을 가지고 있다. 예를 들어 총알을 발사하기 전 총과 총알이 지닌 운동량의 합은 ‘0’인데, 이는 총알을 발사할 때에도 보존된다. 발사할 때 총알이 ‘+’ 방향으로 운동량을 가진다면 반동으로 되튀는 총은 ‘-’ 방향으로 같은 크기의 운동량을 갖기 때문이다. 결국 알짜힘*이 작용하지 않으면 발사 전과 후 총과 총알이 지닌 운동량의 합은 같다. 이와 마찬가지로 충돌 현상에서도 충돌 전 물체들이 지닌 운동량의 합은 충돌 후에도 그대로 보존된다.</p>
+    <p>그러나 운동량과 달리 운동에너지는 보존되지 않는 경우도 있다. 물체가 충돌하면서 소리나 열, 형태 변화 등이 발생하여 운동에너지가 다른 에너지로 바뀌기 때문이다.</p>
+    <p>그러면 ‘운동량’과 ‘운동에너지’의 개념을 활용하여 다양한 충돌 현상을 어떻게 이해할 수 있을까? 충돌 시 운동량과 함께 운동에너지도 보존되는 충돌을 <span class="mk">ⓐ</span>‘완전탄성충돌’이라 한다. 완전탄성충돌에서는 충돌하는 두 물체의 질량이 같은 경우 충돌 시 두 물체의 방향과 속력이 완전히 교환된다. 예를 들어 수평면에서 운동하는 물체가 정지해 있는 물체와 정면으로 완전탄성충돌을 한다면, 두 물체의 방향과 속력이 교환되어 운동하던 물체는 정지하고 정지해 있던 물체는 운동하던 물체가 지녔던 방향과 속력으로 운동한다. 이와 같은 현상은 운동하는 두 물체의 정면충돌에서도 동일하게 나타난다. 이러한 완전탄성충돌은 일상생활에서 그 예를 찾아보기 어렵다. 충돌 시 대부분 소리나 열 등이 발생하기 때문이다.</p>
+    <p>운동량은 보존되지만 운동에너지가 손실되는 충돌이 있다. 이를 ‘비탄성충돌’이라 하는데, 그 중에서 충돌 후 두 물체가 한 덩어리가 되어 움직이는 것을 <span class="mk">ⓑ</span>‘완전비탄성충돌’이라 한다.</p>
+
+    <div class="fig">
+      <div class="cap">[완전비탄성충돌] — 운동하던 찰흙(A)이 정지한 나무토막(B)에 충돌</div>
+      <div class="track">
+        <div class="ball"><div class="dot">A</div><div class="v">찰흙</div></div>
+        <div class="arrow">→</div>
+        <div class="ball"><div class="dot" style="border-radius:8px">B</div><div class="v">나무토막(정지)</div></div>
+      </div>
+      <div class="stagelbl">충돌 전</div>
+      <div class="track" style="margin-top:10px">
+        <div class="lump">A+B</div>
+        <div class="arrow">→</div>
+      </div>
+      <div class="stagelbl">충돌 후 — 한 덩어리가 되어 함께 이동</div>
+    </div>
+
+    <p>이 경우 다른 충돌에서처럼 충돌 전후의 운동량은 보존되지만, A의 운동에너지에 비해 ‘A+B’의 운동에너지는 줄어든다. 충돌 시 A가 지닌 운동에너지가 다른 형태의 에너지로 바뀌기 때문이다.</p>
+    <p>이렇게 물리학에서는 운동량과 운동에너지의 개념을 통해 다양한 충돌 현상에 대해 설명하고 있다. 이러한 물리학적 설명은 충돌 시 충격완화 방법을 연구하는 데 이론적 토대를 제공하는 등 실생활과 밀접한 관련을 맺고 있다.</p>
+    <div class="footnote">* 알짜힘 : 외부에서 작용하는 모든 힘의 합.</div>
+  </div>
+
+  <hr class="divider">
+
+  <div class="q">
+    <div class="stem">24. 윗글을 통해 알 수 있는 내용으로 적절하지 <u>않은</u> 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q24"><span class="n">①</span> 알짜힘이 가해지면 물체의 운동량은 변한다.</label>
+      <label class="opt"><input type="radio" name="q24"><span class="n">②</span> 총알을 발사하기 전 총이 가진 운동량은 ‘0’이다.</label>
+      <label class="opt"><input type="radio" name="q24"><span class="n">③</span> 같은 속도로 운동한다면 질량이 큰 쪽의 운동량이 많다.</label>
+      <label class="opt"><input type="radio" name="q24"><span class="n">④</span> 비탄성충돌에서는 물체의 운동에너지가 다른 에너지로 바뀐다.</label>
+      <label class="opt"><input type="radio" name="q24"><span class="n">⑤</span> 실생활에서 가장 많이 찾아볼 수 있는 충돌은 완전탄성충돌이다.</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">25. ⓐ의 상황을 &lt;보기&gt;와 같이 나타냈을 때, 충돌 직후의 결과를 추리한 내용으로 가장 적절한 것은? <span class="pt">[3점]</span></div>
+    <div class="boki">
+      <div class="bk">&lt; 보 기 &gt;</div>
+      <div class="track">
+        <div class="ball"><div class="dot">A</div><div class="v">5m/s →</div></div>
+        <div class="point">💥</div>
+        <div class="ball"><div class="dot">B</div><div class="v">← 3m/s</div></div>
+      </div>
+      <div class="stagelbl">충돌지점</div>
+      * 질량이 같은 두 물체가 수평면을 운동하다가 충돌지점에서 정면충돌함. 화살표는 운동 방향이며, 마찰력과 공기 저항은 무시함.
+    </div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q25"><span class="n">①</span> A, B가 한 덩어리가 된 채 정지한다.</label>
+      <label class="opt"><input type="radio" name="q25"><span class="n">②</span> A, B가 한 덩어리가 된 채 2m/s의 속력으로, 충돌 지점 왼쪽으로 움직인다.</label>
+      <label class="opt"><input type="radio" name="q25"><span class="n">③</span> A, B가 한 덩어리가 된 채 2m/s의 속력으로, 충돌 지점 오른쪽으로 움직인다.</label>
+      <label class="opt"><input type="radio" name="q25"><span class="n">④</span> A는 5m/s의 속력으로 충돌 지점 왼쪽으로, B는 3m/s의 속력으로 충돌 지점 오른쪽으로 움직인다.</label>
+      <label class="opt"><input type="radio" name="q25"><span class="n">⑤</span> A는 3m/s의 속력으로 충돌 지점 왼쪽으로, B는 5m/s의 속력으로 충돌 지점 오른쪽으로 움직인다.</label>
+    </div>
+  </div>
+
+  <div class="q">
+    <div class="stem">26. ⓑ의 구체적 사례로 가장 적절한 것은?</div>
+    <div class="opts">
+      <label class="opt"><input type="radio" name="q26"><span class="n">①</span> 골프채를 휘둘렀더니 골프공이 멀리 날아갔다.</label>
+      <label class="opt"><input type="radio" name="q26"><span class="n">②</span> 공을 바닥에 굴렸더니 조금 굴러가다가 멈추었다.</label>
+      <label class="opt"><input type="radio" name="q26"><span class="n">③</span> 농구 골대에 공을 던졌더니 림을 맞고 튀어나왔다.</label>
+      <label class="opt"><input type="radio" name="q26"><span class="n">④</span> 창을 표적에 던졌더니 창이 박힌 채 표적이 뒤로 움직였다.</label>
+      <label class="opt"><input type="radio" name="q26"><span class="n">⑤</span> 얼음판 위에서 스케이트를 신고 펜스를 밀었더니 내가 뒤로 밀려났다.</label>
+    </div>
+  </div>
+
+  <details class="key">
+    <summary>정답 및 스킵 지도 (교사용)</summary>
+    <div class="key-body">
+      <b>정답 · 24</b> ⑤ (4문단 “완전탄성충돌은 일상생활에서 그 예를 찾아보기 <b>어렵다</b>” — 정반대 진술) &nbsp;·&nbsp;
+      <b>25</b> ⑤ (질량이 같은 완전탄성충돌은 속도가 <b>그대로 교환</b>된다 — A는 B의 원래 속도(3m/s·왼쪽)를, B는 A의 원래 속도(5m/s·오른쪽)를 갖게 됨) &nbsp;·&nbsp;
+      <b>26</b> ④ (창과 표적이 <b>한 덩어리</b>가 되어 함께 움직임 = 완전비탄성충돌의 정의 그대로)
+      <div class="skipmap">
+        <b>🔎 스킵 지도 — 어디 읽고 어디 넘길까</b><br>
+        · <b>1~2문단</b>(운동량 정의, 총알 예시) = <b>배경.</b> “충돌 전후 운동량 합은 보존” 한 줄만 챙기고 스킵.<br>
+        · <b>3문단</b>(운동에너지는 안 보존될 수 있음) = 24-④의 근거. 한 문장.<br>
+        · <b>4문단</b>(완전탄성충돌: 같은 질량 → 속도 완전 교환, 일상에선 드묾) = <b>25·24-⑤의 핵심.</b> 정독.<br>
+        · <b>5~6문단</b>(완전비탄성충돌: 한 덩어리, 운동에너지 손실) = <b>26번 핵심.</b> “한 덩어리가 되는가”만 확인.<br>
+        → <b>25번은 4문단</b>, <b>26번은 5문단</b>의 정의 한 문장만 정확히 적용하면 풀린다. 24번만 전체를 훑는 문제.
+      </div>
+      <div class="tie">
+        <b>🚀 오늘 실습과 잇기</b> — 오늘 만드는 검증 웹앱에 이 개념을 쓴다면, SF에서 우주선끼리 도킹(완전비탄성충돌에 가까움)하거나 소행성이 튕겨 나가는(완전탄성충돌에 가까움) 장면을 검증 소재로 삼을 수 있다. “두 물체가 충돌 후 한 덩어리가 되는지, 서로 튕겨 나가는지”를 시뮬레이터에 넣어 보게 하면 오늘 문항의 개념이 그대로 코드가 된다.
+      </div>
+    </div>
+  </details>
+
+  <div class="tail">물리 비문학 · 13년 11월 고2 B형 24~26번 [충돌과 운동량·운동에너지]. 지문·문항은 기출 원본 그대로.</div>
+
+</div>
+</body>
+</html>
