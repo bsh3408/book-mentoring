@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>꺼삐딴 리 · 정독 자료</title>
+<style>
+  :root{
+    --paper:#eef0f4; --sheet:#ffffff; --ink:#161616; --ink2:#565d6c; --line:#d7dbe2;
+    --teal:#0f766e; --teal-s:#e6f4f2; --amber:#b45309; --amber-s:#fdf3e6; --indigo:#4338ca; --indigo-s:#eceafe; --rose:#be123c; --rose-s:#fdeaef;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0c0d10; --sheet:#15161a; --ink:#e8e8ec; --ink2:#a2a7b2; --line:#2a2d35;
+      --teal:#5eead4; --teal-s:#0f2b28; --amber:#fbbf5c; --amber-s:#33240f; --indigo:#a5b4fc; --indigo-s:#1e1b3a; --rose:#fb7185; --rose-s:#37141d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","맑은 고딕",system-ui,sans-serif; line-height:1.75; -webkit-text-size-adjust:100%}
+  .wrap{max-width:900px; margin:0 auto; padding:26px 20px 70px}
+  header.top{border-radius:16px; padding:26px 26px 22px; color:#fff;
+    background:linear-gradient(135deg,#4338ca,#0f766e); box-shadow:0 8px 26px rgba(67,56,202,.28)}
+  header.top .kk{font-size:.8rem; letter-spacing:.16em; opacity:.86; font-weight:700}
+  header.top h1{margin:.35em 0 .2em; font-size:1.55rem; line-height:1.32}
+  header.top p{margin:0; font-size:.93rem; opacity:.94}
+  .toc{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .toc a{font-size:.78rem; background:rgba(255,255,255,.16); color:#fff; text-decoration:none; padding:5px 11px; border-radius:999px; border:1px solid rgba(255,255,255,.3)}
+
+  .card{background:var(--sheet); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:0 2px 10px rgba(0,0,0,.05); scroll-margin-top:14px}
+  .card h2{margin:0 0 4px; font-size:1.14rem; display:flex; align-items:center; gap:9px}
+  .card h2 .em{font-size:1.28rem}
+  .lead{color:var(--ink2); font-size:.9rem; margin:0 0 12px}
+
+  table.info{width:100%; border-collapse:collapse; font-size:.88rem; margin:6px 0}
+  table.info td{padding:6px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+  table.info td:first-child{color:var(--ink2); font-weight:700; width:100px; white-space:nowrap}
+
+  .field{margin-top:10px}
+  .field label{display:block; font-size:.84rem; font-weight:700; color:var(--teal); margin-bottom:4px}
+  .field input[type=text], .field textarea{width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-size:.94rem; font-family:inherit; background:var(--paper); color:var(--ink)}
+  .field textarea{min-height:56px; resize:vertical}
+
+  .scene{background:var(--sheet); border:1px solid var(--line); border-radius:14px; margin:22px 0; overflow:hidden}
+  .scene .sh{background:var(--indigo-s); padding:12px 20px; display:flex; align-items:center; gap:10px}
+  .scene .sh .n{width:30px; height:30px; border-radius:50%; background:var(--indigo); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; flex:none; font-size:.92rem}
+  .scene .sh .t{font-weight:800; color:var(--indigo); font-size:1.02rem}
+  .scene .sh .sub{font-size:.8rem; color:var(--ink2); margin-left:auto}
+  .passage{padding:18px 24px; font-family:"바탕","Batang","Noto Serif KR",serif}
+  .passage p{margin:0 0 12px; text-align:justify; text-indent:.6em; line-height:1.95; font-size:1.03rem}
+  .passage p:first-child{text-indent:0}
+  .fn{color:var(--teal); font-weight:800; font-size:.72em; vertical-align:super; cursor:default}
+  .glossary{background:var(--paper); border-top:1px dashed var(--line); padding:12px 24px; font-size:.85rem; color:var(--ink2)}
+  .glossary b{color:var(--teal)}
+  .glossary .g{margin:3px 0}
+
+  .checkpoint{background:var(--teal-s); border-left:5px solid var(--teal); border-radius:0 12px 12px 0; padding:16px 20px; margin:0}
+  .checkpoint .cph{font-weight:800; color:var(--teal); font-size:.92rem; margin-bottom:8px; display:flex; align-items:center; gap:7px}
+  .checkpoint .tag{font-size:.68rem; font-weight:800; color:#fff; border-radius:999px; padding:2px 8px}
+  .tag.predict{background:var(--teal)} .tag.question{background:var(--indigo)} .tag.clarify{background:var(--amber)} .tag.summary{background:var(--rose)}
+  .checkpoint .q{font-size:.92rem; margin:8px 0 4px}
+
+  table.rel{width:100%; border-collapse:collapse; font-size:.9rem; margin-top:8px}
+  table.rel th, table.rel td{border:1px solid var(--line); padding:8px 9px; text-align:left; vertical-align:top}
+  table.rel th{background:var(--teal-s); color:var(--teal); font-weight:800}
+  table.rel td input{width:100%; border:1px solid var(--line); border-radius:6px; padding:5px 6px; font-size:.85rem; font-family:inherit; background:var(--paper); color:var(--ink)}
+
+  table.flow{width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px}
+  table.flow th, table.flow td{border:1px solid var(--line); padding:7px 9px; vertical-align:top}
+  table.flow th{background:var(--indigo-s); color:var(--indigo); font-weight:800; white-space:nowrap; text-align:center}
+  table.flow td.time{font-weight:700; white-space:nowrap; text-align:center; color:var(--ink2)}
+  table.flow td textarea{width:100%; border:1px solid var(--line); border-radius:6px; padding:5px 6px; font-size:.85rem; font-family:inherit; min-height:40px; background:var(--paper); color:var(--ink)}
+
+  .note{font-size:.86rem; color:var(--ink2); background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-top:14px}
+  .note b{color:var(--ink)}
+  footer{text-align:center; color:var(--ink2); font-size:.8rem; margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kk">독서멘토링 · 정독 자료 (풍자 소설)</div>
+    <h1>꺼삐딴 리 — 전광용</h1>
+    <p>일제 → 소련군정 → 미군정, 시대가 바뀔 때마다 변신하는 한 인물을 따라가며 예측·질문·명료화·요약하는 정독 훈련 자료</p>
+    <div class="toc">
+      <a href="#before">읽기 전</a>
+      <a href="#s1">① 현재의 영화</a>
+      <a href="#s2">② 해방과 배신</a>
+      <a href="#s3">③ 체포와 감옥</a>
+      <a href="#s4">④ 소련의 은인</a>
+      <a href="#s5">⑤ 미국으로</a>
+      <a href="#s6">⑥ 결말</a>
+      <a href="#after">읽고 나서</a>
+    </div>
+  </header>
+
+  <div class="card" id="before">
+    <h2><span class="em">📖</span> 읽기 전에</h2>
+    <table class="info">
+      <tr><td>작가</td><td>전광용 (1919~1988)</td></tr>
+      <tr><td>발표</td><td>1962년, 잡지 「사상계」</td></tr>
+      <tr><td>배경</td><td>일제 강점기 말기 ~ 1950년대, 남한과 북한</td></tr>
+      <tr><td>시점</td><td>전지적 작가 시점</td></tr>
+      <tr><td>제목 뜻</td><td>‘꺼삐딴’은 러시아어 капитан(캡틴, 대장)의 한국식 발음. 소련군 시절 이인국이 얻은 별명이다.</td></tr>
+      <tr><td>주제</td><td>기회주의자의 삶에 대한 비판. 출세 지향적 삶과 왜곡된 현대사에 대한 비판</td></tr>
+    </table>
+    <div class="field">
+      <label>🔮 예측하기 — 배경이 “일제 강점기 말기~1950년대, 남한과 북한”이라는 것을 보고, 주인공에게 어떤 일이 일어날 것 같은가?</label>
+      <textarea placeholder="시대가 세 번쯤 바뀌는 동안 한 사람은 어떻게 살아남을 수 있을까?"></textarea>
+    </div>
+  </div>
+
+  <!-- 장면 1 -->
+  <div class="scene" id="s1">
+    <div class="sh"><span class="n">1</span><span class="t">현재의 영화(榮華)</span><span class="sub">1950년대, 서울</span></div>
+    <div class="passage">
+      <p>수술실에서 나온 이인국(李仁國) 박사는 응접실 소파에 파묻히듯이 깊숙이 기대어 앉았다. 그는 백금 무테 안경을 벗어 들고 이마의 땀을 닦았다. 위장 속의 균종(菌腫)<span class="fn">1</span> 적출. 환자는 아직 혼수 상태에서 깨지 못하고 있다.</p>
+      <p>그의 병원 부근은 거의 일류 대학 병원에게까지 손을 쓰지 못하여 밀려오는 급한 환자들 틈에 끼여 환자의 감별에는 각별한 신경을 쓰고 있다. 그것은 마치 여관 보이가 현관으로 들어서는 손님의 옷차림을 훑어보고 그 등급에 맞는 방을 순간적으로 결정하거나 즉석에서 서슴지 않고 거절하는 것과 흡사한 것이라고나 할까.</p>
+      <p>그러기에 그의 고객은, 왜정 시대는 주로 일본인이었고, 현재는 권력층이 아니면 재벌의 셈속에 드는 축이어야 했다.</p>
+      <p>1·4 후퇴시 청진기 하나 손가방 하나를 들고 월남한 이인국 박사다. 그는 수복되자 재빨리 셋방을 얻어 병원을 차렸다. 그러나 이제는 평당 50만 환을 호가하는 도심지에 타일을 바른 2층 양옥을 소유하게 되었다.</p>
+      <p>이인국 박사는 양복 조끼 호주머니에서 십팔금 회중 시계를 꺼내어 시간을 보았다. 2시 40분! 미국 대사관 브라운 씨와의 약속 시간은 이십 분 밖에 남지 않았다. 이 시계에도 몇 가닥의 유서 깊은 이야기가 숨어 있다. 이인국 박사는 시계를 볼 때마다 참말 ‘기적’임에 틀림없었던 사태를 연상하게 된다.</p>
+      <p>왕진 가방과 38선을 넘어온 피난 유물의 하나인 시계, 이 시계는 목숨을 걸고 삶의 도피행을 같이 한 유일품이요, 어찌 보면 인생의 반려(伴侶)이기도 한 것이다. 이 시계는 제국 대학을 졸업할 때 받은 영예로운 수상품이다.</p>
+      <p>이인국 박사는 기대와 호기에 가득 찬 심정으로 항공 우편의 피봉을 뜯었다. 딸 나미의 편지다. 미국에서 유학 중인 딸은, 대학에서 영문과를 택한 딸에게 개인 지도를 해 준 외인 교수와 결혼하겠다는 내용을 담고 있었다.</p>
+      <p>‘결국은 그렇게 되고야 마는 건가……’ 그는 편지를 탁자 위에 밀어 놓았다. 어쩌면 이러한 결말은 딸의 출국 이전에서부터 이미 싹튼 것인지도 모른다는 생각이 들었다.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>1. 균종(菌腫)</b> 종양</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag question">질문</span> 잠깐, 캐물어 보자</div>
+    <div class="q">이인국 박사는 환자를 “왜정 시대는 일본인, 지금은 권력층이나 재벌”로만 가려 받는다. 그리고 그의 회중시계는 “목숨을 걸고 삶의 도피행을 같이 한” 물건이라고 한다. 이 두 정보에서, 이 인물이 지금까지 <b>어떻게 살아왔을지</b> 미리 짐작해 보자.</div>
+    <div class="field"><textarea placeholder="이 사람은 시대가 바뀔 때마다 어떤 태도를 취했을 것 같은가?"></textarea></div>
+  </div>
+
+  <!-- 장면 2 -->
+  <div class="scene" id="s2">
+    <div class="sh"><span class="n">2</span><span class="t">해방, 그리고 지워야 할 흔적</span><span class="sub">회상 — 1945년 8월</span></div>
+    <div class="passage">
+      <p>1945년 8월 하순. 아직 해방의 감격이 온 누리를 뒤덮어 소용돌이칠 때였다. 이인국 박사는 이날도 며칠 동안 불안과 초조에 휘둘려 잠을 제대로 자지 못했다.</p>
+      <p>그런데 며칠 전 시민 대회 끝에 있는 해방 경축 행진을 자기도 흥분에 차 구경하느라고 혜숙이와 함께 대문 앞에 나갔다가, 자위대 완장을 두르고 대열에 끼인 젊은이와 눈이 마주쳤다. 이쪽을 노려보는 청년의 눈에서 불똥이 튀는 것 같은 살기를 느꼈다.</p>
+      <p>무슨 영문인지 모르고 어리벙벙하던 이인국 박사는, 그것이 언젠가 입원을 거절당한 사상범 환자 춘석이라는 것을 혜숙에게서 듣고 슬금슬금 주위의 눈치를 살피며 집으로 기어 들어왔다.</p>
+      <p>‘국어 상용[國語(日語) 상용]의 가(家)’ 해방되던 날 떼어서 집어넣어 둔 것을 그 동안 깜박 잊고 있었다. 그는 액자의 뒤를 열어 음식점 면허장 같은 두터운 모조지를 빼내어 글자 한 자도 제대로 남지 않게 손끝에 힘을 주어 꼼꼼히 찢었다. 이 종잇장 하나만 해도 일본인과의 교제에 있어서 얼마나 떳떳한 구실을 할 수 있었던 것인가. 아릇한 미련 같은 것이 섬광처럼 머릿속을 스쳐 갔다.</p>
+      <p>마누라의 손끝 수범하는 내조지공도 컸지만 애들까지도 곧잘 지켜 주었기에 종잇장을 탄 것이 아니던가. 그것을 탄 집안이 무슨 경사나 난 것처럼 기뻐했다. “장꼬대까지 국어로 할 정도가 아니면 이영예로운 기회 얻을 수 있겠소”하던 국민 총력 연맹 지부장의 웃음 띤 치사 소리가 떠올랐다.</p>
+      <p>그는 후 한숨을 내뿜었다. 그리고는 지금 통장의 잔액을 깡그리 내주던 은행 지점장의 호의에 새삼 고마움을 느끼고 있었다. 그것마저 없었더라면……등골에 오싹하는 한기가 느껴왔다.</p>
+      <p>형무소에서 병보석으로 가출옥되었다는 중환자가 업혀 왔다. 헝클어진 눈에 앙상하게 뼈만 남은 몸을 제대로 가누지도 못하는 환자. 그는 간호원의 부축으로 겨우 진찰을 받았다.</p>
+      <p>입원시킬 것인가, 거절할 것인가…… 환자의 몰골이나 업고 온 사람의 옷매무새로 보아 경제 정도는 뻔한 일이라 생각되었다. 그러나 그것보다 더 마음에 켕기는 것이 있었다. 일본인 간부급들이 자기 집처럼 들락날락하는 이 병원에 이런 사상범을 입원시킨다는 것은 관선 시의원이라는 체면에서도 떳떳하지 못할 것이며, 자타가 공인하는 모범적인 황국 신민(皇國臣民)의 공든 탑이 하루아침에 무너지는 결과를 가져오는 것이라는 생각이 들었다.</p>
+      <p>순간 그는 이런 경우의 가부 결정에 일도양단하는 자기 식으로 찰나적인 단안을 내렸다. 그는 응급 치료만 하여 주고 입원실이 없다는 가장 떳떳하고도 정당한 구실로 애걸하는 환자를 돌려보냈다. 그런데 며칠 전 그 환자 춘석이가, 자위대 완장을 두르고 대열에 끼인 젊은이로 나타난 것이었다.</p>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 뜻을 짚어 보자</div>
+    <div class="q">‘국어 상용의 가’라는 액자는 일제강점기 때 조선어 대신 <b>일본어를 집에서까지 쓰는 집</b>이라는 뜻으로 받는 표창이었다. 이인국 박사는 해방되자마자 이걸 왜 몰래 찢어 없앴을까? 그리고 자신이 입원을 거절해 쫓아낸 사상범 청년과 해방 후 눈이 마주쳤을 때, 왜 그렇게 두려워했을까?</div>
+    <div class="field"><textarea placeholder="이인국 박사가 두려워하는 것은 정확히 무엇인가?"></textarea></div>
+  </div>
+
+  <!-- 장면 3 -->
+  <div class="scene" id="s3">
+    <div class="sh"><span class="n">3</span><span class="t">체포, 그리고 감옥에서도 계속되는 처세</span><span class="sub">소련군정기</span></div>
+    <div class="passage">
+      <p>자위대가 치안대로 바뀐 다음날이다. 이인국 박사는 치안대에 연행되었다. 시멘트 바닥에 무릎을 꿇고 앉은 그는 입술이 파랗게 질려 있었다. 하반신이 저려 오고 옆구리가 쑤신다. 이것만으로도 자기의 생애를 통한 가장 큰 고역이라고 그는 생각하고 있다.</p>
+      <p>‘이럴 줄 알았더라면 어디든지 숨거나, 진작으로 남으로라도 도피했을 걸…… 그러나 이 판국에 나를 감싸줄 사람이 어디 있담. 의지할 곳은 다 나와 같은 코스를 밟았거나 어느만치 앞잡이 노릇을 하던 놈들이 아닌가. 일본인! 가장 믿었던 성벽이 다 무너진 지금 누구를…….’</p>
+      <p>‘친일파, 민족 반역자, 반일 투사 치료 거부, 일제의 감침 행위……’ 이건 너무도 어마어마한 죄상이다. 취조할 때 열거하던 그대로 한다면 고작해야 무기 징역, 사형 감이지도 모른다.</p>
+      <p>강방 속을 빼곡히 찼다. 그러나 고참자와 신입자의 서열은 분명했다. 달포가 지나는 사이에 맨 안쪽 똥통 위에 자리잡았던 이인국 박사는 삼분지 이의 지점으로 점차 승격되었다.</p>
+      <p>그들이 예측하는 식대로의 중형으로 치른다면 자기의 죄상은 너무도 뚜렷하다. 마음에 거슬리면 총살일 판이다.</p>
+      <p>이인국 1박사는 끝내 스텐코프 소좌<span class="fn">2</span>의 배경으로 요직에 있는 당 간부의 추천을 받아 아들의 소련 유학을 결정 짓고야 말았다.</p>
+      <p>“여보, 보통으로 삽시다. 거저 표나지 않게 사는 것이 이런 세상에선 가장 편안할 것 같아요. 이제 겨우 죽을 고비를 면했는데 또 재까지 그 잘난……” “가만있어요, 호랑이두 굴에 가야 잡는 법이오. 무슨 세상이 되든 할대로 해 봅시다.” “그래도 저 어린것을 어떻게 노어까지도 배운단 말이오.” “아니, 중학교 애들도 가지 못해 골들을 싸매는데, 대학생이 못 가 견딜라구.”</p>
+      <p>‘흥, 혁명 유가족들도 가기 힘든 구멍을 이인국의 아들이 뚫었으니 어디 두구 보자…….’ 그는 만장의 기염을 토하며 혼자 중얼거리는 희망에 찬 미소를 풍겼다.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>2. 스텐코프 소좌</b> 이 지역을 관할하는 소련군 장교(‘소좌’는 계급)</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag predict">예측</span> 잠깐, 짐작해 보자</div>
+    <div class="q">이인국 박사는 감옥에 갇혀 총살까지 각오하는 처지이면서도, 정작 하는 일은 <b>아들을 소련으로 유학 보내는 것</b>이다. 이 선택이 이후 그의 운명에 어떤 영향을 줄 것 같은가?</div>
+    <div class="field"><textarea placeholder="위기 속에서도 그는 왜 이런 '투자'를 할까?"></textarea></div>
+  </div>
+
+  <!-- 장면 4 -->
+  <div class="scene" id="s4">
+    <div class="sh"><span class="n">4</span><span class="t">소련의 은인이 되다</span><span class="sub">발진티푸스, 그리고 스텐코프</span></div>
+    <div class="passage">
+      <p>수일 전 소군 장교 한 사람이 급성 맹장염이 져 복막염으로 번졌다. 그 환자의 실을 뽑는 옆에 온 스텐코프에게 이인국 박사는 말 절반 손짓 절반으로 혹을 수술하겠다는 의사를 표명했다. 스텐코프는 ‘하라쇼<span class="fn">3</span>’를 연발했다.</p>
+      <p>수술일은 왔다. 이인국 박사는 손에 익은 자기 병원의 의료 기재를 전부 운반하여 오게 했다. 수술은 예상 이상의 단시간으로 끝났다. 완치되어 퇴원하는 날 스텐코프는 이인국 박사의 손은 부서져라 쥐면서 외쳤다.</p>
+      <p>“꺼삐딴 리, 스바씨보<span class="fn">4</span>.” 이인국 박사는 입을 헤벌리고 웃기만 했다. 마음의 감옥에서 해방된 것만 같았다.</p>
+      <p>다음날 스텐코프는 이인국 박사를 자기 방으로 불렀다. 그가 스스로 손을 내밀어 예절적인 악수를 청한 것은 이것이 처음이었다. “내일부터는 집에서 통근해도 좋소.”</p>
+      <p>“염려 없었소, 독또우리 리. 위대한 붉은 군대가 그럴 리가 없소. 만약 있었다 하더라도 그것은 무슨 착각이었을 것이오. 내가 책임지고 찾도록 하겠소.” 스텐코프의 얼굴에 결의를 띤 심각한 표정이 스쳐 가는 것을 이인국 박사는 똑바로 쳐다보았다.</p>
+      <p>이인국 박사는 죽음의 직전에서 풀려나 집으로 향했다. 어느 사이 저렇게 노어로 의사 표시를 할 수 있게 되었느냐고 스텐코프가 감탄하더라는 통역의 말을 되뇌이면서…….</p>
+      <p>얼근히 주기를 띤 스텐코프가 순시를 돌았다. 이인국 박사는 오늘의 이 기회를 놓치지 않겠다고 마음먹었다. 그의 뜨내기 노어도 가끔 순시하는 스텐코프와 인사말을 주고받을 수 있을 정도로 진전되었다.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>3. 하라쇼</b> 러시아어로 ‘좋다’ &nbsp; <b>4. 스바씨보</b> 러시아어로 ‘고맙습니다’</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag summary">요약</span> 잠깐, 정리해 보자</div>
+    <div class="q">이인국 박사가 <b>총살 직전의 죄인</b>에서 <b>스텐코프의 신임받는 의사</b>가 되기까지의 과정을 세 단계로 요약해 보자.</div>
+    <div class="field"><textarea placeholder="① 감옥에 갇힘 → ② ~ → ③ ~"></textarea></div>
+  </div>
+
+  <!-- 장면 5 -->
+  <div class="scene" id="s5">
+    <div class="sh"><span class="n">5</span><span class="t">이번엔 미국으로</span><span class="sub">시대가 다시 바뀌다</span></div>
+    <div class="passage">
+      <p>어쩌면 이것은 수술 후의 스텐코프가 자기에게 하던 방식 그대로인지도 모른다는 생각이 들었다. 이인국 박사는 지성이면 감천이고, 나의 처세법은 유에스에이(USA)에도 통하는구나 하는 기고만장한 기분이었다.</p>
+      <p>브라운 씨가 나오자 이인국 박사는 웃으며 선물을 내어놓았다. 포장을 풀고 난 브라운 씨는 만면에 미소를 띠며 기쁨을 참지 못하는 듯 탱큐를 거듭 부르짖었다. “참 이거 귀중한 것입니다.” “뭐 대단한 것이 아닙니다만 그저 제 성의입니다.”</p>
+      <p>“닥터 리는 영어를 어디서 배웠습니까?” “일제 시대에 일본말 식으로 배웠지요. 예를 들면 ‘잣도 이즈 아 캇도’식으로요.” “그런데 지금 발음은 좋은데요. 문법이 아주 정확한 스탠더드 잉글리시입니다.”</p>
+      <p>“그거, 국무실에서 통지 왔습니다.” 이인국 박사는 뛸 듯이 기뻤으나 솟구치는 흥분을 억제하면서 천천히 손을 내밀어 악수를 청했다. “탱큐, 탱큐.”</p>
+      <p>이인국 박사는 지성이면 감천이라고, 나의 처세법은 유에스에이(USA)에도 통하는구나 하는 기고만장한 기분이었다. “미국에 가서도 잘 부탁합니다.” “네, 염려 마십시오. 떠나실 때 소개장을 써드리지요.”</p>
+      <p>신체 검사는 이미 끝난 것이고 외무부 출국 수속도 국무성 통지만 오면 즉일 될 수 있게 당당 책임자에게 교섭이 되어 있지 않은가? 빠르면 일주일 내에 떠나게 될지도 모른다는 브라운 씨의 말이 떠올랐다.</p>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 패턴을 짚어 보자</div>
+    <div class="q">이인국 박사가 스텐코프(소련)에게 했던 것과 브라운 씨(미국)에게 하는 행동을 비교해 보자. <b>무엇이 똑같이 반복</b>되고 있는가? (선물, 언어 실력 자랑, 상대의 환심 사기 등)</div>
+    <div class="field"><textarea placeholder="스텐코프에게: / 브라운 씨에게: — 공통점은?"></textarea></div>
+  </div>
+
+  <!-- 장면 6 -->
+  <div class="scene" id="s6">
+    <div class="sh"><span class="n">6</span><span class="t">반도 호텔로</span><span class="sub">결말 — 자기 합리화</span></div>
+    <div class="passage">
+      <p>문득 딸 나미와 아들 원식의 얼굴이 한꺼번에 망막으로 휘몰아 왔다. 그는 두 주먹을 불끈 쥐며 경련을 일으키듯 긴장을 띠다가 어색한 미소를 흘려 보냈다.</p>
+      <p>‘흥, 그 사마귀 같은 일본놈들 틈에서도 살았고, 닥싸귀 같은 로스케 속에서도 살아났는데, 양키라고 다를까……혁명이 일겠으면 일구, 나라가 바뀌겠으면 바뀌구, 아직 이 이인국의 살 구멍은 막히지 않았다. 나보다 얼마든지 날뛰던 놈들도 있는데, 나쯤이야…….’</p>
+      <p>그는 허공을 향하여 마음껏 소리치고 싶었다.</p>
+      <p>‘그러면 우선 비행기 회사에 들러 형편이나 알아 볼까……’ 이인국 박사는 캘리포니아 특산 시가를 비스듬히 문 채 지나가는 택시를 불러 세웠다.</p>
+      <p>“반도 호텔로…….” 차창을 거쳐 보이는 맑은 가을 하늘이 이인국 박사에게는 더욱 푸르고 드높게만 느껴졌다.</p>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 마지막 독백을 곱씹어 보자</div>
+    <div class="q">이인국 박사는 “일본놈들 틈에서도 살았고, 로스케(소련) 속에서도 살아났는데, 양키라고 다를까”라고 되뇐다. 이 한 문장이 이 소설 전체의 주제를 어떻게 압축하고 있는지 써 보자. 그리고 그가 반성 없이 <b>“나쯤이야”</b>라고 말하는 태도를 어떻게 평가하는가?</div>
+    <div class="field"><textarea placeholder="이인국 박사는 자신의 삶을 성공이라 여기는가, 아니면 우리는 그렇게 봐야 할까?"></textarea></div>
+  </div>
+
+  <!-- 읽고 나서 -->
+  <div class="card" id="after">
+    <h2><span class="em">🗂️</span> 읽고 나서 — 내용 정리</h2>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:14px 0 4px">이인국 박사의 3단 변신</h3>
+    <table class="rel">
+      <tr><th>시대</th><th>이인국의 행동</th><th>얻은 것</th></tr>
+      <tr><td>일제 강점기</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>소련군정기</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>미군정~1950년대</td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:18px 0 4px">사건 흐름 정리</h3>
+    <table class="flow">
+      <tr><th style="width:150px">시기</th><th>일어난 일 (한 줄로 요약)</th></tr>
+      <tr><td class="time">현재(1950년대)</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">1945.8 해방 직후</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">체포·투옥</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">스텐코프와의 인연</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">브라운과의 인연</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">결말</td><td><textarea></textarea></td></tr>
+    </table>
+    <p class="lead" style="margin-top:8px">💡 「미스터 방」과 마찬가지로 이 소설도 <b>현재 → 회상 → 현재</b>로 오가는 역순행적 구성이다. 두 작품을 비교하면, 시대의 권력에 빌붙어 이익을 챙기는 인물을 풍자하는 방식이 얼마나 닮아 있는지 보인다.</p>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:18px 0 4px">주제 정리</h3>
+    <div class="field">
+      <label>이 작품이 비판하는 것은 무엇이며, 제목 「꺼삐딴 리」가 풍자적으로 느껴지는 이유는?</label>
+      <textarea placeholder="힌트: 능력만으로 포장된 기회주의, 신념 없이 권력을 좇는 처세술, 그리고 그것이 '출세'로 보이는 아이러니"></textarea>
+    </div>
+  </div>
+
+  <div class="note">📎 이 작품은 반민족적 기회주의를 풍자한 대표적 현대소설로, 「미스터 방」과 같은 계열의 인물 유형(변절자·기회주의자)을 다룬다. 두 작품을 이어서 읽으면 “권력에 빌붙는 인물”이라는 하나의 문학적 유형을 더 깊이 이해할 수 있다.</div>
+
+  <footer>독서멘토링 · 정독 자료 · 「꺼삐딴 리」 전광용(1962)</footer>
+
+</div>
+</body>
+</html>

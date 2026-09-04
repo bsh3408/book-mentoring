@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>날개 · 정독 자료</title>
+<style>
+  :root{
+    --paper:#eef0f4; --sheet:#ffffff; --ink:#161616; --ink2:#565d6c; --line:#d7dbe2;
+    --teal:#0f766e; --teal-s:#e6f4f2; --amber:#b45309; --amber-s:#fdf3e6; --indigo:#4338ca; --indigo-s:#eceafe; --rose:#be123c; --rose-s:#fdeaef;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{
+      --paper:#0c0d10; --sheet:#15161a; --ink:#e8e8ec; --ink2:#a2a7b2; --line:#2a2d35;
+      --teal:#5eead4; --teal-s:#0f2b28; --amber:#fbbf5c; --amber-s:#33240f; --indigo:#a5b4fc; --indigo-s:#1e1b3a; --rose:#fb7185; --rose-s:#37141d;
+    }
+  }
+  *{box-sizing:border-box}
+  body{margin:0; background:var(--paper); color:var(--ink);
+    font-family:"Pretendard","Malgun Gothic","맑은 고딕",system-ui,sans-serif; line-height:1.75; -webkit-text-size-adjust:100%}
+  .wrap{max-width:900px; margin:0 auto; padding:26px 20px 70px}
+  header.top{border-radius:16px; padding:26px 26px 22px; color:#fff;
+    background:linear-gradient(135deg,#4338ca,#0f766e); box-shadow:0 8px 26px rgba(67,56,202,.28)}
+  header.top .kk{font-size:.8rem; letter-spacing:.16em; opacity:.86; font-weight:700}
+  header.top h1{margin:.35em 0 .2em; font-size:1.55rem; line-height:1.32}
+  header.top p{margin:0; font-size:.93rem; opacity:.94}
+  .toc{display:flex; flex-wrap:wrap; gap:8px; margin-top:14px}
+  .toc a{font-size:.78rem; background:rgba(255,255,255,.16); color:#fff; text-decoration:none; padding:5px 11px; border-radius:999px; border:1px solid rgba(255,255,255,.3)}
+
+  .card{background:var(--sheet); border:1px solid var(--line); border-radius:14px; padding:20px 22px; margin:18px 0; box-shadow:0 2px 10px rgba(0,0,0,.05); scroll-margin-top:14px}
+  .card h2{margin:0 0 4px; font-size:1.14rem; display:flex; align-items:center; gap:9px}
+  .card h2 .em{font-size:1.28rem}
+  .lead{color:var(--ink2); font-size:.9rem; margin:0 0 12px}
+
+  table.info{width:100%; border-collapse:collapse; font-size:.88rem; margin:6px 0}
+  table.info td{padding:6px 10px; border-bottom:1px solid var(--line); vertical-align:top}
+  table.info td:first-child{color:var(--ink2); font-weight:700; width:100px; white-space:nowrap}
+
+  .field{margin-top:10px}
+  .field label{display:block; font-size:.84rem; font-weight:700; color:var(--teal); margin-bottom:4px}
+  .field input[type=text], .field textarea{width:100%; border:1px solid var(--line); border-radius:8px; padding:9px 11px; font-size:.94rem; font-family:inherit; background:var(--paper); color:var(--ink)}
+  .field textarea{min-height:56px; resize:vertical}
+
+  .scene{background:var(--sheet); border:1px solid var(--line); border-radius:14px; margin:22px 0; overflow:hidden}
+  .scene .sh{background:var(--indigo-s); padding:12px 20px; display:flex; align-items:center; gap:10px}
+  .scene .sh .n{width:30px; height:30px; border-radius:50%; background:var(--indigo); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:800; flex:none; font-size:.92rem}
+  .scene .sh .t{font-weight:800; color:var(--indigo); font-size:1.02rem}
+  .scene .sh .sub{font-size:.8rem; color:var(--ink2); margin-left:auto}
+  .passage{padding:18px 24px; font-family:"바탕","Batang","Noto Serif KR",serif}
+  .passage p{margin:0 0 12px; text-align:justify; text-indent:.6em; line-height:1.95; font-size:1.03rem}
+  .passage p:first-child{text-indent:0}
+  .fn{color:var(--teal); font-weight:800; font-size:.72em; vertical-align:super; cursor:default}
+  .glossary{background:var(--paper); border-top:1px dashed var(--line); padding:12px 24px; font-size:.85rem; color:var(--ink2)}
+  .glossary b{color:var(--teal)}
+  .glossary .g{margin:3px 0}
+
+  .checkpoint{background:var(--teal-s); border-left:5px solid var(--teal); border-radius:0 12px 12px 0; padding:16px 20px; margin:0}
+  .checkpoint .cph{font-weight:800; color:var(--teal); font-size:.92rem; margin-bottom:8px; display:flex; align-items:center; gap:7px}
+  .checkpoint .tag{font-size:.68rem; font-weight:800; color:#fff; border-radius:999px; padding:2px 8px}
+  .tag.predict{background:var(--teal)} .tag.question{background:var(--indigo)} .tag.clarify{background:var(--amber)} .tag.summary{background:var(--rose)}
+  .checkpoint .q{font-size:.92rem; margin:8px 0 4px}
+
+  table.rel{width:100%; border-collapse:collapse; font-size:.9rem; margin-top:8px}
+  table.rel th, table.rel td{border:1px solid var(--line); padding:8px 9px; text-align:left; vertical-align:top}
+  table.rel th{background:var(--teal-s); color:var(--teal); font-weight:800}
+  table.rel td input{width:100%; border:1px solid var(--line); border-radius:6px; padding:5px 6px; font-size:.85rem; font-family:inherit; background:var(--paper); color:var(--ink)}
+
+  table.flow{width:100%; border-collapse:collapse; font-size:.88rem; margin-top:8px}
+  table.flow th, table.flow td{border:1px solid var(--line); padding:7px 9px; vertical-align:top}
+  table.flow th{background:var(--indigo-s); color:var(--indigo); font-weight:800; white-space:nowrap; text-align:center}
+  table.flow td.time{font-weight:700; white-space:nowrap; text-align:center; color:var(--ink2)}
+  table.flow td textarea{width:100%; border:1px solid var(--line); border-radius:6px; padding:5px 6px; font-size:.85rem; font-family:inherit; min-height:40px; background:var(--paper); color:var(--ink)}
+
+  .note{font-size:.86rem; color:var(--ink2); background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:12px 14px; margin-top:14px}
+  .note b{color:var(--ink)}
+  footer{text-align:center; color:var(--ink2); font-size:.8rem; margin-top:24px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <div class="kk">독서멘토링 · 정독 자료 (모더니즘 심화 난이도)</div>
+    <h1>날개 — 이상</h1>
+    <p>의식의 흐름을 따라가는 난해한 문장을, 장면마다 멈춰 예측·질문·명료화·요약하며 읽는 정독 훈련 자료</p>
+    <div class="toc">
+      <a href="#before">읽기 전</a>
+      <a href="#s1">① 서문</a>
+      <a href="#s2">② 33번지</a>
+      <a href="#s3">③ 돈과 쾌감</a>
+      <a href="#s4">④ 첫 외출</a>
+      <a href="#s5">⑤ 아스피린과 아달린</a>
+      <a href="#s6">⑥ 결말</a>
+      <a href="#after">읽고 나서</a>
+    </div>
+  </header>
+
+  <div class="card" id="before">
+    <h2><span class="em">📖</span> 읽기 전에</h2>
+    <table class="info">
+      <tr><td>작가</td><td>이상 (본명 김해경, 1910~1937)</td></tr>
+      <tr><td>발표</td><td>1936년, 잡지 「조광」</td></tr>
+      <tr><td>배경</td><td>1930년대 어느 날, 경성(서울)</td></tr>
+      <tr><td>시점</td><td>1인칭 주인공 시점</td></tr>
+      <tr><td>인물 — 나</td><td>직업이 없는 지식인. 매춘하는 아내에 기생해 권태로운 삶을 살지만, 사회로 복귀하고픈 희망이 희미하게 남아 있다.</td></tr>
+      <tr><td>인물 — 아내</td><td>‘나’에 비해 적극적이고 현실적인 여성. ‘나’와 대조적이며, 대화나 소통을 시도하지 않는다.</td></tr>
+    </table>
+    <div class="note" style="margin-top:10px"><b>미리 각오할 것</b> — 이 소설은 사건이 아니라 <b>‘나’의 머릿속 생각의 흐름</b>을 그대로 따라간다. 줄거리를 좇으려 하지 말고, “이 사람은 지금 왜 이런 생각을 하고 있지?”를 계속 물으며 읽어야 한다. 그래서 이번엔 <span class="pt clarify" style="background:var(--amber); color:#fff; padding:2px 8px; border-radius:999px; font-size:.72em; font-weight:800">명료화</span> 체크포인트가 유난히 많다.</div>
+    <div class="field">
+      <label>🔮 예측하기 — 제목 「날개」, 그리고 첫 문장 “박제가 되어 버린 천재를 아시오?”를 보고 어떤 이야기일 것 같은가?</label>
+      <textarea placeholder="'박제'라는 단어가 주는 느낌은 무엇인가? 날개와 어떻게 연결될까?"></textarea>
+    </div>
+  </div>
+
+  <!-- 장면 1 -->
+  <div class="scene" id="s1">
+    <div class="sh"><span class="n">1</span><span class="t">기묘한 서문</span><span class="sub">본이야기 전, 작가의 독백</span></div>
+    <div class="passage">
+      <p>‘박제가 되어 버린 천재’를 아시오? 나는 유쾌하오. 이런 때 연애까지가 유쾌하오. 육신이 흐느적흐느적하도록 피로했을 때만 정신이 은화처럼 맑소. 니코틴이 내 횟배 앓는 뱃속으로 스미면 머릿속에 으레 백지가 준비되는 법이오. 그 위에다 나는 위트와 파라독스를 바둑 포석처럼 늘어 놓소. 가증할 상식의 병이오.</p>
+      <p>나는 또 여인과 생활을 설계하오. 연애기법에마저 서먹서먹해진 지성의 극치를 흘깃 좀 들여다본 일이 있는, 말하자면 일종의 정신분일자<span class="fn">1</span>말이오. 이런 여인의 반 — 그것은 온갖 것의 반이오 — 만을 영수하는 생활을 설계한다는 말이오. 그런 생활 속에 한 발만 들여놓고 흡사 두 개의 태양처럼 마주 쳐다보면서 낄낄거리는 것이오. 나는 아마 어지간히 인생의 제행이 싱거워서 견딜 수가 없게끔 되고 그만둔 모양이오. 굿바이.</p>
+      <p>굿바이. 그대는 이따금 그대가 제일 싫어하는 음식을 탐식하는 아이로니<span class="fn">2</span>를 실천해 보는 것도 놓을 것 같소. 위트와 파라독스와……. 그대 자신을 위조하는 것도 할 만한 일이오. 그대의 작품은 한번도 본 일이 없는 기성품에 의하여 차라리 경편하고 고매하리다.</p>
+      <p>19세기는 될 수 있거든 봉쇄하여 버리오. 도스토예프스키 정신이란 자칫하면 낭비일 것 같소. 위고를 불란서의 빵 한 조각이라고는 누가 그랬는지 지언인 듯싶소. 그러나 인생 혹은 그 모형에 있어서 ‘디테일’ 때문에 속는다거나 해서야 되겠소? 화를 보지 마오. 부디 그대께 고하는 것이니…….</p>
+      <p>“테이프가 끊어지면 피가 나오. 상채기도 머지 않아 완치될 줄 믿소. 굿바이.” 감정은 어떤 ‘포우즈’. (그 ‘포우즈’의 원소만을 지적하는 것이 아닌지 나도 모르겠소.) 그 포우즈가 부동자세에까지 고도화할 때 감정은 딱 공급을 정지합네다.</p>
+      <p>나는 내 비범한 발육을 회고하여 세상을 보는 안목을 규정하였소.</p>
+      <p>여왕봉과 미망인 — 세상의 하고 많은 여인이 본질적으로 이미 미망인이 아닌 이가 있으리까? 아니, 여인의 전부가 그 일상에 있어서 개개 ‘미망인’이라는 내 논리가 뜻밖에도 여성에 대한 모험이 되오? 굿바이.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>1. 정신분일자</b> 정신이 여러 갈래로 흩어진 사람이라는 뜻의 조어 &nbsp; <b>2. 아이로니</b> 아이러니(irony), 반어</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 솔직히 인정하고 넘어가자</div>
+    <div class="q">이 서문은 일부러 뜻을 알기 어렵게 쓴 부분이다. 전부 이해하지 못해도 괜찮다. 다만 “굿바이”라는 말이 반복되는 것, 그리고 “나는 유쾌하오”라는 말이 진짜 유쾌해서 하는 말 같은지 아닌지만 느껴 보자.</div>
+    <div class="field"><textarea placeholder="이 인물은 정말로 유쾌해 보이는가, 아니면 반대로 들리는가?"></textarea></div>
+  </div>
+
+  <!-- 장면 2 -->
+  <div class="scene" id="s2">
+    <div class="sh"><span class="n">2</span><span class="t">33번지, 볕 안 드는 방</span><span class="sub">‘나’의 공간</span></div>
+    <div class="passage">
+      <p>그 33번지라는 것이 구조가 흡사 유곽<span class="fn">3</span>이라는 느낌이 없지 않다. 한 번지에 18가구가 죽 어깨를 맞대고 늘어서서 창호가 똑같고 아궁이 모양이 똑같다. 게다가 각 가구에 사는 사람들이 송이송이 꽃과 같이 젊다. 해가 들지 않는다. 해가 드는 것을 그들이 모른 체하는 까닭이다.</p>
+      <p>나는 내 방이 — 집이 아니다. 집은 없다 — 마음에 들었다. 방안의 기온은 내 체온을 위하여 쾌적하였고, 방안의 침침한 정도가 또한 내 안력을 위하여 쾌적하였다. 나는 내 방 이상의 서늘한 방도 또 따뜻한 방도 희망하지 않았다.</p>
+      <p>그러나 이것은 행복이라든가 불행이라든가 하는 것을 계산하는 것은 아니었다. 말하자면 나는 내가 행복되다고도 생각할 필요가 없었고, 그렇다고 불행하다고도 생각할 필요가 없었다. 그냥 그날을 그저 까닭없이 펀둥펀둥 게으르고만 있으면 만사는 그만이었던 것이다.</p>
+      <p>이 절대적인 내 방은 대문간에서 세어서 똑 일곱째 칸이다. 럭키 세븐의 뜻이 없지 않다. 이런 이 방이 가운데 장지<span class="fn">4</span>로 말미암아 두 칸으로 나뉘어 있었다는 그것이 내 운명의 상징이었던 것을 누가 알랴? 아랫방은 그래도 해가 든다. 해가 영영 들지 않는 윗방이 즉 내 방인 것은 말할 것도 없다. 이렇게 볕드는 방이 아내 방이요, 볕 안드는 방이 내 방이요 하고 아내와 나 둘 중에 누가 정했는지 나는 기억하지 못한다. 그러나 나에게는 불평이 없다.</p>
+      <p>아내가 외출만 하면 나는 얼른 아랫방으로 와서 그 동쪽으로 난 들창을 열어 놓고, 열어놓으면 들이비치는 햇살이 아내의 화장대를 비쳐 가지각색 병들이 아롱이 지면서 찬란하게 빛나고, 이렇게 빛나는 것을 보는 것은 다시없는 내 오락이다.</p>
+      <p>그렇건만 나에게는 옷이 없었다. 아내는 내게 옷을 주지 않았다. 입고 있는 골덴양복 한 벌이 내 자리옷이었고 통상복과 나들이옷을 겸한 것이었다.</p>
+      <p>어느덧 손수건만해졌던 볕이 나갔는데 아내는 외출에서 돌아오지 않는다. 아내에게 직업이 있었던가? 나는 아내의 직업이 무엇인지 알 수 없다. 아내는 외출한다. 외출할 뿐만 아니라 내객이 많다. 아내에게 내객이 많은 날은 나는 온종일 내 방에서 이불을 쓰고 누워 있어야만 된다.</p>
+      <p>그런 날은 나는 의식적으로 우울해 하였다. 그러면 아내는 나에게 돈을 준다. 오십전짜리 은화다. 나는 그것이 좋았다. 그러나 그것을 무엇에 써야 옳을지 몰라서 늘 머리맡에 던져 두고 두고 한 것이 어느 결에 모여서 꽤 많아졌다. 어느날 이것을 본 아내는 금고처럼 생긴 벙어리<span class="fn">5</span>를 사다 준다.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>3. 유곽</b> 술과 함께 성매매가 이루어지던 옛 시설 &nbsp; <b>4. 장지</b> 방과 방 사이를 막는 문 &nbsp; <b>5. 벙어리</b> 저금통</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag question">질문</span> 잠깐, 캐물어 보자</div>
+    <div class="q">‘나’의 방은 볕이 안 들고, 아내의 방은 볕이 든다. 이 <b>공간의 차이</b>가 두 사람의 관계에 대해 무엇을 암시하는 것 같은가? 또한 ‘나’는 왜 아내의 직업도, 자기 방에 옷이 없는 것도 이상하게 여기지 않을까?</div>
+    <div class="field"><textarea placeholder="'나'는 왜 이렇게 수동적일까?"></textarea></div>
+  </div>
+
+  <!-- 장면 3 -->
+  <div class="scene" id="s3">
+    <div class="sh"><span class="n">3</span><span class="t">돈과 벙어리, 그리고 쾌감의 정체</span><span class="sub">이불 속의 연구</span></div>
+    <div class="passage">
+      <p>어느날 나는 고 벙어리를 변소에 갖다 넣어 버렸다. 그 때 벙어리 속에는 몇 푼이나 되는지 모르겠으나 고 은화들이 꽤 들어 있었다.</p>
+      <p>나는 내가 지구 위에 살며 내가 이렇게 살고 있는 지구가 질풍신뢰의 속력으로 광대무변의 공간을 달리고 있다는 것을 생각했을 때 참 허망하였다.</p>
+      <p>나는 서글픈 마음으로 아내의 꾸지람을 기다렸다. 그러나 아내는 끝내 아무 말도 하지 않았다. 않았을 뿐 아니라 여전히 돈은 돈대로 머리맡에 놓고 가지 않나! 내 머리맡에는 어느덧 은화가 꽤 많이 모였다.</p>
+      <p>내객이 아내에게 돈을 놓고 가는 것이나 아내가 내게 돈을 놓고 가는 것이나 일종의 쾌감 — 그 외의 다른 아무런 이유도 없는 것이 아닐까 하는 것을 나는 또 이불 속에서 연구하기 시작하였다. 쾌감이라면 어떤 종류의 쾌감일까를 계속하여 연구하였다. 그러나 그것은 이불 속의 연구로는 알 길이 없었다. 쾌감, 쾌감, 하고 나는 뜻밖에도 이 문제에 대해서만 흥미를 느꼈다.</p>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag summary">요약</span> 잠깐, 정리해 보자</div>
+    <div class="q">‘나’는 돈이 오가는 이유를 “쾌감”이라는 한 단어로 정리한다. 지금까지 읽은 내용을 바탕으로, ‘나’가 <b>돈과 세상 물정에 대해 얼마나 무지한지</b> 한두 문장으로 정리해 보자.</div>
+    <div class="field"><textarea placeholder="예: 나는 돈을 ~라고만 생각하고, ~에 대해서는 전혀 모른다"></textarea></div>
+  </div>
+
+  <!-- 장면 4 -->
+  <div class="scene" id="s4">
+    <div class="sh"><span class="n">4</span><span class="t">첫 외출, 그리고 처음 얻은 쾌감</span><span class="sub">밤거리와 아내의 방</span></div>
+    <div class="passage">
+      <p>나는 아내의 밤 외출 틈을 타서 밖으로 나왔다. 나는 거리에서 잊어버리지 않고 가지고 나온 은화를 지폐로 바꾼다. 오 원이나 된다. 그것을 주머니에 넣고 나는 목적지를 잃어버리기 위하여 얼마든지 거리를 쏘다녔다.</p>
+      <p>나는 과연 피로를 이 이상 견디기가 어려웠다. 나는 가까스로 내 집을 찾았다. 나는 내 방을 가려면 아내 방을 통과하지 않으면 안 될 것을 알고, 아내에게 내객이 있나 없나를 걱정하면서 미닫이 앞에서 좀 거북살스럽게 기침을 한 번 했더니, 이것은 참 또 너무도 암상스럽게 미닫이가 열리면서 아내의 얼굴과 그 등 뒤에 낯설은 남자의 얼굴이 이쪽을 내다보는 것이다.</p>
+      <p>나는 이불 속에서 아내에게 사죄하였다. 그것은 네 오해라고…… 나는 사실 밤이 퍽으나 이슥한 줄만 알았던 것이다. 나는 아내 이불 위에 엎드러지면서 바지 포켓 속에서 그 돈 오 원을 꺼내 아내 손에 쥐어 준 것을 간신히 기억할 뿐이다.</p>
+      <p>이튿날 잠이 깨었을 때 나는 내 아내 방 아내 이불 속에 있었다. 이것이 이 33번지에서 살기 시작한 이래 내가 아내 방에서 잔 맨 처음이었다.</p>
+      <p>나는 밤일을 생각해 보았다. 그 돈 오 원을 아내 손에 쥐어 주고 넘어졌을 때에 느낄 수 있었던 쾌감을 나는 무엇이라고 설명할 수가 없었다. 그러나 내객들이 내 아내에게 돈 놓고 가는 심리며 내 아내가 내게 돈 놓고 가는 심리의 비밀을 나는 알아낸 것 같아서 여간 즐거운 것이 아니다.</p>
+      <p>따라서 나는 또 오늘 밤에도 외출하고 싶었다. 그러나 돈이 없다.</p>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 뜻을 곱씹어 보자</div>
+    <div class="q">‘나’는 아내에게 <b>돈을 주는 것</b>에서 쾌감을 느꼈다고 “알아냈다”고 착각한다. 그러나 정작 그 쾌감의 진짜 정체(아내와 한방에서 자는 것, 정상적인 부부관계에 대한 갈망)는 짚어내지 못한다. ‘나’의 이 <b>엉뚱한 깨달음</b>이 왜 서글프게 느껴지는지 써 보자.</div>
+    <div class="field"><textarea placeholder="'나'는 무엇을 착각하고 있는가?"></textarea></div>
+  </div>
+
+  <!-- 장면 5 -->
+  <div class="scene" id="s5">
+    <div class="sh"><span class="n">5</span><span class="t">아스피린과 아달린</span><span class="sub">의혹의 시작</span></div>
+    <div class="passage">
+      <p>이튿날 내가 눈을 떴을 때 아내는 내 머리맡에 앉아서 제법 근심스러운 얼굴이다. 나는 감기가 들었다. 아내는 내 머리를 쓱 짚어 보더니 약을 먹어야지 한다. 아내는 따뜻한 물에 하얀 정제약 네 개를 준다. 이것을 먹고 한잠 푹 자고 나면 괜찮다는 것이다. 나는 널름 받아먹었다. 쌉싸름한 것이 짐작 같아서는 아마 아스피린인가 싶다.</p>
+      <p>나는 콧물을 훌쩍훌쩍 하면서 여러 날을 앓았다. 앓는 동안에 끊이지 않고 그 정제약을 먹었다. 그러는 동안에 감기도 나았다. 그러나 아내는 나더러 외출하지 말라고 이르는 것이다. 이 약을 날마다 먹고 그리고 가만히 누워 있으라는 것이다.</p>
+      <p>나는 아마 한 달이나 이렇게 지냈나보다. 그러나 다음 순간 실로 세상에도 이상스러운 것이 눈에 띄었다. 그것은 최면약 아달린<span class="fn">6</span>갑이었다. 나는 그것을 아내의 화장대 밑에서 발견하고 그것이 흡사 아스피린처럼 생겼다고 느꼈다. 나는 그것을 열어 보았다. 꼭 네 개가 비었다.</p>
+      <p>나는 오늘 아침에 네 개의 아스피린을 먹은 것을 기억하고 있었다. 나는 잤다. 어제도 그제도 그끄제도…… 나는 졸려서 견딜 수가 없었다. 나는 감기가 다 나았는데도…… 아내는 내게 아스피린을 주었다.</p>
+      <p>별안간 아뜩하더니 하마터면 나는 까무러칠 뻔하였다. 나는 그 아달린을 주머니에 넣고 집을 나섰다. 그리고 산을 찾아 올라갔다. 인간 세상의 아무것도 보기가 싫었던 것이다.</p>
+      <p>단 오 분이 못가서 나는 그만 귀찮은 생각이 번쩍 들면서 심술이 났다. 나는 주머니에서 가지고 온 아달린을 꺼내 남은 여섯 개를 한꺼번에 질겅질겅 씹어먹어 버렸다. 그리고 나서 나는 그 벤치 위에 가로 기다랗게 누웠다. 나는 게서 그냥 깊이 잠이 들었다.</p>
+      <p>내가 잠을 깨었을 때는 날이 환히 밝은 뒤다. 나는 거기서 일주야를 잔 것이다. 그 속에서도 나는 번개처럼 아스피린과 아달린이 생각났다. 아스피린, 아달린, 아스피린, 아달린…… 아내는 한 달 동안 아달린을 아스피린이라고 속이고 내게 먹였다.</p>
+      <p>무슨 목적으로 아내는 나를 밤이나 낮이나 재웠어야 됐나? 나를 밤이나 낮이나 재워 놓고, 그리고 아내는 내가 자는 동안에 무슨 짓을 했나? 나를 조금씩 조금씩 죽이려던 것일까? 그러나 또 생각하여 보면 내가 한 달을 두고 먹어 온 것이 아스피린이었는지도 모른다.</p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>6. 아달린</b> 실제 존재했던 수면제(최면약)의 상품명</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag question">질문</span> 잠깐, 진짜 의도를 캐물어 보자</div>
+    <div class="q">아내가 ‘나’에게 한 달간 수면제를 먹인 <b>진짜 이유</b>는 소설에 명확히 나오지 않는다. ‘나’ 자신도 “아스피린이었는지도 모른다”며 스스로 의심을 거둔다. 여러분 생각엔 아내가 왜 그랬을 것 같은가? 근거가 되는 문장을 앞에서 찾아보자.</div>
+    <div class="field"><textarea placeholder="내객이 많은 것과 관련이 있을까?"></textarea></div>
+  </div>
+
+  <!-- 장면 6 -->
+  <div class="scene" id="s6">
+    <div class="sh"><span class="n">6</span><span class="t">미쓰꼬시 옥상에서</span><span class="sub">결말</span></div>
+    <div class="passage">
+      <p>부리나케 와 보니까 그러나 아내에게는 내객이 있었다. 나는 그만 어지러워서 게가 나둥그러졌다. 그랬더니 아내는 넘어진 내 위에 덮치면서 내 살을 함부로 물어뜯는 것이다. 아파 죽겠다. 아내는 너 밤새워 가면서 도둑질하러 다니느냐, 계집질하러 다니느냐고 발악이다.</p>
+      <p>나는 그냥 줄달음박질을 쳐서 나와 버렸다. 여러번 자동차에 치일 뻔하면서 나는 그래도 경성역으로 찾아갔다. 그러나 경성역 홀에 한 걸음 들여 놓았을 때 나는 내 주머니에는 돈이 한푼도 없는 것을, 그것을 깜박 잊었던 것을 깨달았다.</p>
+      <p>다만 몇시간 후에 내가 미쓰꼬시<span class="fn">7</span> 옥상에 있는 것을 깨달았을 때는 거의 대낮이었다. 나는 거기 아무 데나 주저앉아서 내 자라 온 스물여섯 해를 회고하여 보았다. 몽롱한 기억 속에서는 이렇다는 아무 제목도 불거져 나오지 않았다.</p>
+      <p>허리를 굽혀서 나는 그저 금붕어를 들여다보고 있었다. 나는 또 오탁의 거리를 내려다보았다. 거기서는 피곤한 생활이 똑 금붕어 지느러미처럼 흐늑흐늑 허우적거렸다.</p>
+      <p>아스피린과 아달린. 우리들은 서로 오해하고 있느니라. 우리 부부는 숙명적으로 발이 맞지 않는 절름발이인 것이다. 내나 아내나 제 거동에 로직을 붙일 필요는 없다. 사실은 사실대로 오해는 오해대로 그저 끝없이 발을 절뚝거리면서 세상을 걸어가면 되는 것이다. 그렇지 않을까?</p>
+      <p>이때 뚜우 하고 정오 사이렌이 울었다. 사람들은 모두 네 활개를 펴고 닭처럼 푸드덕거리는 것 같고 온갖 유리와 강철과 대리석과 지폐와 잉크가 부글부글 끓고 수선을 떨고 하는 것 같은 찰나! 그야말로 현란을 극한 정오다.</p>
+      <p>나는 불현듯 겨드랑이가 가렵다. 아하, 그것은 내 인공의 날개가 돋았던 자국이다. 오늘은 없는 이 날개. 머릿속에서는 희망과 야심이 말소된 페이지가 딕셔너리 넘어가듯 번뜩였다.</p>
+      <p>나는 걷던 걸음을 멈추고 그리고 일어나 한 번 이렇게 외쳐 보고 싶었다.</p>
+      <p><b>날개야 다시 돋아라. 날자. 날자. 한 번만 더 날자꾸나. 한 번만 더 날아 보자꾸나.</b></p>
+    </div>
+    <div class="glossary">
+      <div class="g"><b>7. 미쓰꼬시</b> 일제강점기 경성(서울)에 있던 백화점 이름</div>
+    </div>
+  </div>
+
+  <div class="checkpoint">
+    <div class="cph"><span class="tag clarify">명료화</span> 잠깐, 마지막 문장을 곱씹어 보자</div>
+    <div class="q">‘나’는 왜 갑자기 “날개”가 “돋았던 자국”을 느끼고, 그것이 다시 돋기를 외치는가? <b>날개</b>는 이 인물에게 무엇을 상징하는 것 같은가?</div>
+    <div class="field"><textarea placeholder="날개=자유? 자아? 희망? 여러분의 해석을 자유롭게 써 보자"></textarea></div>
+  </div>
+
+  <!-- 읽고 나서 -->
+  <div class="card" id="after">
+    <h2><span class="em">🗂️</span> 읽고 나서 — 내용 정리</h2>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:14px 0 4px">인물 비교</h3>
+    <table class="rel">
+      <tr><th>인물</th><th>특징</th><th>세상과의 관계</th></tr>
+      <tr><td>나</td><td><input type="text"></td><td><input type="text"></td></tr>
+      <tr><td>아내</td><td><input type="text"></td><td><input type="text"></td></tr>
+    </table>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:18px 0 4px">사건 흐름 정리</h3>
+    <table class="flow">
+      <tr><th style="width:150px">장면</th><th>일어난 일 (한 줄로 요약)</th></tr>
+      <tr><td class="time">서문</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">33번지 방</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">돈과 쾌감 연구</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">첫 외출</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">아스피린·아달린 의혹</td><td><textarea></textarea></td></tr>
+      <tr><td class="time">결말(미쓰꼬시 옥상)</td><td><textarea></textarea></td></tr>
+    </table>
+
+    <h3 style="font-size:1rem; color:var(--indigo); margin:18px 0 4px">주제 정리</h3>
+    <div class="field">
+      <label>이 작품이 그리는 ‘나’의 삶은 어떤 모습이며, 작가는 왜 이렇게 어려운 문체(의식의 흐름)로 그것을 표현했을까?</label>
+      <textarea placeholder="힌트: 일제 강점기 지식인의 무력한 삶, 자아 분열, 그리고 그 속에서도 포기하지 않는 삶의 의미 찾기"></textarea>
+    </div>
+    <div class="note" style="margin-top:12px"><b>참고 — 원작 해제</b><br>갈래: 단편·심리·신변 소설 / 성격: 고백적, 상징적 / 주제: 무력한 삶과 자아 분열 속에서 벗어나 본래의 자아를 찾고자 하는 의지<br>일제 강점기 지식인의 자기 소모적인 삶을 통해 현대인의 분열된 자의식과 고독을 의식의 흐름에 따라 기술한 실험 소설이다. 자아의 정체성을 의미하는 ‘날개’가 돋기를 염원하는 것은, 무의미한 삶 속에서도 생의 의미 찾기를 포기하지 않았음을 드러낸다.</div>
+  </div>
+
+  <div class="note">📎 이 자료는 한국 모더니즘 문학의 대표작이자, 여러 문학 교과서와 EBS 교재에 실려 온 정전이다. 매우 난해한 문체이므로, 다 이해하지 못해도 괜찮다. 체크포인트에 자기 생각을 솔직히 적는 것 자체가 정독 훈련이다.</div>
+
+  <footer>독서멘토링 · 정독 자료 · 「날개」 이상(1936)</footer>
+
+</div>
+</body>
+</html>
